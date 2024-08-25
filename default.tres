@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ColorDefs" load_steps=2 format=3 uid="uid://cxmwehdvj4h8j"]
+
+[ext_resource type="Script" path="res://Defs.gd" id="1_aiy61"]
+
+[resource]
+script = ExtResource("1_aiy61")
+red_normal = Color(1, 0, 0, 1)
+green_normal = Color(0, 1, 0, 1)
+red_highlight = Color(0.615686, 0, 0.956863, 1)
+green_highlight = Color(0, 0.501961, 1, 1)
+lamp_off = Color(0.411765, 0.411765, 0.411765, 1)
+lamp_on = Color(1, 1, 1, 1)
+sig_red = Color(1, 0, 0, 1)
+sig_green = Color(0, 1, 0, 1)
+sig_blue = Color(0, 0, 1, 1)
+sig_yellow = Color(1, 1, 0, 1)
+sig_magenta = Color(1, 0, 1, 1)
+sig_cyan = Color(0, 1, 1, 1)
+sig_white = Color(1, 1, 1, 1)
+sig_gray = Color(0.745098, 0.745098, 0.745098, 1)
+sig_black = Color(0, 0, 0, 1)

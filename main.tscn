@@ -1,0 +1,125 @@
+[gd_scene load_steps=10 format=3 uid="uid://b4vgnls7asr22"]
+
+[ext_resource type="PackedScene" uid="uid://i3ycu10a4fla" path="res://entities/ConstantCombinator.tscn" id="1_35puf"]
+[ext_resource type="Script" path="res://main.gd" id="1_gm5m1"]
+[ext_resource type="PackedScene" uid="uid://dnj8ethuayyij" path="res://entities/DeciderCombinator.tscn" id="2_atqid"]
+[ext_resource type="Resource" uid="uid://cxmwehdvj4h8j" path="res://default.tres" id="2_ufvml"]
+[ext_resource type="PackedScene" uid="uid://tg82u0uacdsj" path="res://entities/ArithmeticCombinator.tscn" id="3_jfm67"]
+[ext_resource type="PackedScene" uid="uid://bwt4du6dpwp0a" path="res://entities/Lamp.tscn" id="4_qrxy8"]
+[ext_resource type="Script" path="res://camera_2d.gd" id="6_jsvw5"]
+[ext_resource type="PackedScene" uid="uid://caqbxnwbxamtu" path="res://entities/SmallPole.tscn" id="6_jtjkr"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_yg81n"]
+vertices = PackedVector2Array(886, 406, 10, 406, 10, 18, 886, 18)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(0, 8, 896, 8, 896, 416, 0, 416)])
+agent_radius = 8.0
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_gm5m1")
+colors = ExtResource("2_ufvml")
+
+[node name="components" type="Node2D" parent="."]
+
+[node name="src" parent="components" instance=ExtResource("1_35puf")]
+position = Vector2(64, 64)
+
+[node name="ArithmeticCombinator" parent="components" instance=ExtResource("3_jfm67")]
+position = Vector2(320, 128)
+
+[node name="Lamp" parent="components" instance=ExtResource("4_qrxy8")]
+position = Vector2(448, 64)
+
+[node name="DeciderCombinator" parent="components" instance=ExtResource("2_atqid")]
+position = Vector2(192, 128)
+
+[node name="Pole" parent="components" instance=ExtResource("6_jtjkr")]
+position = Vector2(64, 192)
+
+[node name="routes" type="Node2D" parent="."]
+
+[node name="connections" type="Node2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="connections"]
+position = Vector2(87, 41)
+points = PackedVector2Array(31, 75, 31, 209, 122, 209, 122, 184)
+width = 2.0
+default_color = Color(0.82836, 0, 0.201649, 1)
+joint_mode = 1
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2D2" type="Line2D" parent="connections"]
+position = Vector2(98, 66)
+points = PackedVector2Array(16, 50, 16, 80, 16, 188, 78.9598, 188, 79, 160)
+width = 2.0
+default_color = Color(0, 0.631373, 0.219608, 1)
+joint_mode = 1
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
+position = Vector2(0, -8)
+navigation_polygon = SubResource("NavigationPolygon_yg81n")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -192.0
+offset_bottom = 192.0
+grow_horizontal = 0
+placeholder_text = "Insert blueprint string"
+wrap_mode = 1
+autowrap_mode = 1
+
+[node name="loadBluePrint" type="Button" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -46.0
+offset_top = 200.0
+offset_bottom = 231.0
+grow_horizontal = 0
+text = "Load"
+
+[node name="netOptions" type="OptionButton" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -32.0
+offset_top = 240.0
+offset_bottom = 260.0
+grow_horizontal = 0
+selected = 0
+item_count = 3
+popup/item_0/text = "Nets"
+popup/item_1/text = "Routes"
+popup/item_1/id = 1
+popup/item_2/text = "Both"
+popup/item_2/id = 2
+
+[node name="center" type="Button" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_top = 280.0
+offset_bottom = 311.0
+grow_horizontal = 0
+text = "Center"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(800, 450)
+script = ExtResource("6_jsvw5")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="pressed" from="CanvasLayer/center" to="." method="_on_center_pressed"]

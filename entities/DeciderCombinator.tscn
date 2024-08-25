@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnj8ethuayyij"]
+
+[ext_resource type="Script" path="res://entities/DeciderCombinator.gd" id="1_fsumh"]
+[ext_resource type="Texture2D" uid="uid://c381b46a1le7a" path="res://circle.svg" id="1_ph5b0"]
+[ext_resource type="Animation" uid="uid://cqlpkv0r5l2t7" path="res://combinator-orientation.res" id="2_1humf"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t8plj"]
+_data = {
+"orientation": ExtResource("2_1humf")
+}
+
+[node name="DeciderCombinator" type="Line2D"]
+points = PackedVector2Array(-48, -112, -48, 112, 48, 112, 48, -112)
+closed = true
+width = 2.0
+default_color = Color(0.564706, 0.196078, 0.0235294, 1)
+script = ExtResource("1_fsumh")
+
+[node name="c2_red" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+z_index = 1
+position = Vector2(-16, -96)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_ph5b0")
+
+[node name="c2_green" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0, 1)
+z_index = 1
+position = Vector2(16, -96)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_ph5b0")
+
+[node name="c1_red" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+z_index = 1
+position = Vector2(-16, 96)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_ph5b0")
+
+[node name="c1_green" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0, 1)
+z_index = 1
+position = Vector2(16, 96)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_ph5b0")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -40.0
+offset_top = -16.0
+offset_right = 40.0
+offset_bottom = 16.0
+pivot_offset = Vector2(40, 16)
+theme_override_font_sizes/font_size = 10
+text = "S > 0
+S #in"
+text_overrun_behavior = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_t8plj")
+}
+speed_scale = 0.0

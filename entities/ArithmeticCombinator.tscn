@@ -1,0 +1,92 @@
+[gd_scene load_steps=6 format=3 uid="uid://tg82u0uacdsj"]
+
+[ext_resource type="Script" path="res://entities/ArithmeticCombinator.gd" id="1_gehq1"]
+[ext_resource type="Texture2D" uid="uid://c381b46a1le7a" path="res://circle.svg" id="1_nikj6"]
+[ext_resource type="Animation" uid="uid://cqlpkv0r5l2t7" path="res://combinator-orientation.res" id="2_pedei"]
+
+[sub_resource type="Animation" id="Animation_c4feu"]
+length = 0.001
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2xxhs"]
+_data = {
+"RESET": SubResource("Animation_c4feu"),
+"orientation": ExtResource("2_pedei")
+}
+
+[node name="ArithmeticCombinator" type="Line2D"]
+points = PackedVector2Array(-48, -112, -48, 112, 48, 112, 48, -112)
+closed = true
+width = 2.0
+default_color = Color(0.242647, 0.419447, 0.429371, 1)
+script = ExtResource("1_gehq1")
+
+[node name="c2_red" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+z_index = 1
+position = Vector2(-16, -96)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_nikj6")
+
+[node name="c2_green" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0, 1)
+z_index = 1
+position = Vector2(16, -96)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_nikj6")
+
+[node name="c1_red" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+z_index = 1
+position = Vector2(-16, 96)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_nikj6")
+
+[node name="c1_green" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0, 1)
+z_index = 1
+position = Vector2(16, 96)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_nikj6")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -40.0
+offset_top = -16.0
+offset_right = 40.0
+offset_bottom = 16.0
+pivot_offset = Vector2(40, 16)
+theme_override_font_sizes/font_size = 10
+text = "each * 5
+each"
+text_overrun_behavior = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2xxhs")
+}
+speed_scale = 0.0
