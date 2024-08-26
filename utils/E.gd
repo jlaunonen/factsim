@@ -13,7 +13,7 @@ enum {
 }
 
 static func connectorIdToEnum(connectorId: int, netColor: int) -> int:
-    return connectorId - 1 + netColor
+	return connectorId - 1 + netColor
 
 static func enumToNetColor(netConnector: int) -> int:
-    return NetColorRED if netConnector < NetConnectorGREEN_1 else NetColorGREEN
+	return NetColorRED if netConnector < NetConnectorGREEN_1 else NetColorGREEN
