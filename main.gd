@@ -64,8 +64,8 @@ func _on_timer_timeout() -> void:
 	highlight_net(conns, true)
 
 
-func highlight_net(network: Array[Network.NetNode], highlighted: bool) -> void:
-	for net_node: Network.NetNode in network:
+func highlight_net(network: Array[NetNode], highlighted: bool) -> void:
+	for net_node: NetNode in network:
 		var ent = entities[net_node.ent]
 		ent.set_conn_highlight(net_node.conn, highlighted)
 
