@@ -97,13 +97,14 @@ static func positionToVector(map: Dictionary):
 	return Vector2(map.get("x"), map.get("y"))
 
 
-static func loadBp(bp: String):
+static func loadBpString(bp: String):
 	if bp.is_empty() or bp[0] != "0":
 		print("Invalid or incompatible blueprint string")
 		return null
 
 	var compressed: PackedByteArray = Marshalls.base64_to_raw(bp.substr(1))
-	return decodeBp(compressed)
+	var json = decodeBp(compressed)
+	return BlueprintDto.new(json.get("blueprint"))
 
 
 static func openBp(bpFilename: String):
@@ -126,6 +127,4 @@ static func decodeBp(fileBytes: PackedByteArray):
 
 	var fileJson: String = file.get_string_from_utf8()
 
-	var bpData = JSON.parse_string(fileJson)
-
-	return BlueprintDto.new(bpData.get("blueprint"))
+	return JSON.parse_string(fileJson)

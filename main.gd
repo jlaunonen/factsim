@@ -49,6 +49,8 @@ func _ready() -> void:
 
 	timer.timeout.connect(_on_timer_timeout)
 
+	_load_bp(preload("res://initial.json"))
+
 
 var _timer_pos := -1
 func _on_timer_timeout() -> void:
@@ -74,10 +76,15 @@ var networks := []
 
 
 func _on_load_blue_print_pressed() -> void:
-	var bp: BpLoader.BlueprintDto = BpLoader.loadBp(bpString.text)
+	var bp: BpLoader.BlueprintDto = BpLoader.loadBpString(bpString.text)
+	_load_bp(bp)
+
+
+func _load_bp(bp):
 	if bp == null:
 		return
-	print(bp)
+	if bp is JSON:
+		bp = BpLoader.BlueprintDto.new(bp.data.get("blueprint"))
 
 	removeAllChildren(components)
 	removeAllChildren(connections)
