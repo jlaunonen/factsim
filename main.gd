@@ -28,6 +28,7 @@ var _entityScenes = {
 	"medium-electric-pole": preload("res://entities/MediumPole.tscn"),
 }
 
+## Shared color definitions (read by [method CombinatorBase._ready]).
 @export var colors: ColorDefs
 
 @onready var doLoad: Button = $"CanvasLayer/loadBluePrint"

@@ -31,8 +31,16 @@ func _ready():
 	_connectors[E.NetConnectorGREEN_2] = c2_green
 
 	if colors == null:
-		print("Warning: Colors not set for entity")
-		colors = load("res://default.tres")
+		# Usually the shared colors instance is already set at this point, but if the node is present
+		# in the main scene at start, they are not so try to read them from parent.
+		var host = find_parent("SimulationHost")
+		if host != null:
+			var host_colors = host.get("colors")
+			if host_colors != null:
+				colors = host_colors
+		if colors == null:
+			print("Warning: Colors not set for entity")
+			colors = load("res://default.tres")
 
 	_apply_config()
 

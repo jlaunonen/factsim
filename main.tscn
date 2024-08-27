@@ -15,7 +15,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(0, 8, 896, 8, 896, 416, 0, 416)])
 agent_radius = 8.0
 
-[node name="Node2D" type="Node2D"]
+[node name="SimulationHost" type="Node2D"]
 script = ExtResource("1_gm5m1")
 colors = ExtResource("2_ufvml")
 
