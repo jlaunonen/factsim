@@ -46,8 +46,6 @@ func _ready() -> void:
 	if colors == null:
 		colors = load("res://default.tres")
 
-	doLoad.pressed.connect(_on_do_load)
-	netVisualization.item_selected.connect(_on_net_visualization_changed)
 	timer.timeout.connect(_on_timer_timeout)
 
 
@@ -73,7 +71,8 @@ var entities := {}
 var netParts := []  # tuple[int, int, int, int]
 var networks := []
 
-func _on_do_load():
+
+func _on_load_blue_print_pressed() -> void:
 	var bp: BpLoader.BlueprintDto = BpLoader.loadBp(bpString.text)
 	if bp == null:
 		return
@@ -138,7 +137,7 @@ func _on_do_load():
 	_on_center_pressed()
 
 
-func _on_net_visualization_changed(index: int) -> void:
+func _on_net_options_item_selected(index: int) -> void:
 	var v : int = netVisualization.get_item_id(index)
 	var all := v == 2
 	connections.visible = v == 0 or all

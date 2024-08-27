@@ -8,12 +8,7 @@ var _enabled := false
 
 func _ready():
 	super()
-	btn.pressed.connect(sw)
 	_setBtnText(_enabled)
-
-
-func sw():
-	_setBtnText(not _enabled)
 
 
 func _setBtnText(enabled: bool):
@@ -41,4 +36,8 @@ func _apply_config() -> void:
 
 	label.text = txt
 
-	_setBtnText(cfg.controlBehavior.get("enabled", false)) #TODO correct name?
+	_setBtnText(cfg.controlBehavior.get("is_on", true))
+
+
+func _on_button_toggled(toggled_on: bool) -> void:
+	_setBtnText(toggled_on)

@@ -176,6 +176,7 @@ offset_right = 20.0
 offset_bottom = -9.0
 pivot_offset = Vector2(20, 16)
 toggle_mode = true
+action_mode = 0
 text = "ON"
 metadata/_edit_use_anchors_ = true
 
@@ -214,3 +215,5 @@ speed_scale = 0.0
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 vertices = PackedVector2Array(-40, -40, -40, 40, -24, 40, -24, 24, -8, 24, -8, 40, 8, 40, 8, 24, 24, 24, 24, 40, 40, 40, 40, -40)
+
+[connection signal="toggled" from="Button" to="." method="_on_button_toggled"]

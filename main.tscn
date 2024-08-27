@@ -122,4 +122,6 @@ script = ExtResource("6_jsvw5")
 wait_time = 2.0
 autostart = true
 
+[connection signal="pressed" from="CanvasLayer/loadBluePrint" to="." method="_on_load_blue_print_pressed"]
+[connection signal="item_selected" from="CanvasLayer/netOptions" to="." method="_on_net_options_item_selected"]
 [connection signal="pressed" from="CanvasLayer/center" to="." method="_on_center_pressed"]
