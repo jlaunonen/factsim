@@ -26,6 +26,7 @@ var _entityScenes = {
 	"small-lamp": preload("res://entities/Lamp.tscn"),
 	"small-electric-pole": preload("res://entities/SmallPole.tscn"),
 	"medium-electric-pole": preload("res://entities/MediumPole.tscn"),
+	"big-electric-pole": preload("res://entities/BigPole.tscn"),
 }
 
 ## Shared color definitions (read by [method CombinatorBase._ready]).
