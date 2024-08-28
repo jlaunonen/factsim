@@ -14,6 +14,7 @@ func _ready():
 func _setBtnText(enabled: bool):
 	_enabled = enabled
 	if btn != null:
+		btn.set_pressed_no_signal(enabled)
 		btn.text = "ON" if enabled else "OFF"
 
 
