@@ -41,6 +41,7 @@ var _entityScenes = {
 @onready var connections: Node2D = $"connections"
 @onready var routes: Node2D = $"routes"
 @onready var simulated_steps: Label = $"CanvasLayer/simulatedSteps"
+@onready var simulation_speed_label: Label = $"CanvasLayer/simSpeedLabel"
 
 
 var _simulated_steps := 0
@@ -53,6 +54,7 @@ func _ready() -> void:
 	timer.timeout.connect(_on_timer_timeout)
 
 	_load_bp(preload("res://initial.json"))
+	_on_sim_speed_slider_value_changed($"CanvasLayer/simSpeedSlider".value)
 
 
 func _on_timer_timeout() -> void:
@@ -168,9 +170,10 @@ func simulate() -> void:
 		var child = components.get_child(index)
 		child.simulate()
 
-	for index in connections.get_child_count():
-		var child = connections.get_child(index)
-		child.dump_values()
+	if timer.wait_time > 0.1 or timer.is_stopped():
+		for index in connections.get_child_count():
+			var child = connections.get_child(index)
+			child.dump_values()
 
 
 func _on_step_forward_pressed() -> void:
@@ -182,3 +185,12 @@ func _on_auto_step_toggled(toggled_on: bool) -> void:
 		timer.start()
 	else:
 		timer.stop()
+
+
+func _on_sim_speed_slider_value_changed(value: float) -> void:
+	var new_timeout := 1.0 / value
+	timer.wait_time = new_timeout
+	if not timer.is_stopped() and (value < 3 or timer.time_left > new_timeout):
+		timer.stop()
+		timer.start()
+	simulation_speed_label.text = str(round(value * 10.0) / 10.0)
