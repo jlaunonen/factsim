@@ -17,3 +17,7 @@ static func connectorIdToEnum(connectorId: int, netColor: int) -> int:
 
 static func enumToNetColor(netConnector: int) -> int:
 	return NetColorRED if netConnector < NetConnectorGREEN_1 else NetColorGREEN
+
+static func netColorToName(netColor: int) -> String:
+	# XXX: Comparison from color to connector, but as they are supposed to be compatible, the function works for connectors too.
+	return "RED" if netColor < NetConnectorGREEN_1 else "GREEN"

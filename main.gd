@@ -40,7 +40,10 @@ var _entityScenes = {
 @onready var components: Node2D = $"components"
 @onready var connections: Node2D = $"connections"
 @onready var routes: Node2D = $"routes"
+@onready var simulated_steps: Label = $"CanvasLayer/simulatedSteps"
 
+
+var _simulated_steps := 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -52,17 +55,8 @@ func _ready() -> void:
 	_load_bp(preload("res://initial.json"))
 
 
-var _timer_pos := -1
 func _on_timer_timeout() -> void:
-	if networks.is_empty():
-		return
-	if _timer_pos >= 0:
-		highlight_net(networks[_timer_pos], false)
-
-	_timer_pos = (_timer_pos + 1) % networks.size()
-
-	var conns = networks[_timer_pos]
-	highlight_net(conns, true)
+	simulate()
 
 
 func highlight_net(network: Array[NetNode], highlighted: bool) -> void:
@@ -85,6 +79,9 @@ func _load_bp(bp):
 		return
 	if bp is JSON:
 		bp = BpLoader.BlueprintDto.new(bp.data.get("blueprint"))
+
+	_simulated_steps = 0
+	simulated_steps.text = str(0)
 
 	removeAllChildren(components)
 	removeAllChildren(connections)
@@ -118,27 +115,12 @@ func _load_bp(bp):
 				_bpArea = entityRect
 
 	prints("Rawnet:", netParts)
-	var netresult = Network.reorder(netParts)
+	var netresult = Network.reorder(netParts, entities)
 	networks = netresult[0]
 
-	for netPart in netParts:
-		var srcEnt = entities[netPart[0]]
-		var srcCn: int = netPart[1]
-		var dstEnt = entities[netPart[2]]
-		var dstCn: int = netPart[3]
-
-		var src = srcEnt.get_conn_point(srcCn)
-		var dst = dstEnt.get_conn_point(dstCn)
-
-		prints(src, "--", dst)
-
-		var line := Line2D.new()
-		line.width = 2
-		line.points = [src, dst]
-		match E.enumToNetColor(srcCn):
-			E.NetColorRED: line.default_color = Color.RED
-			E.NetColorGREEN: line.default_color = Color.GREEN
-		connections.add_child(line)
+	for net in netresult[2]:
+		connections.add_child(net)
+		net.owner = self
 
 	camera.position = _bpArea.get_center()
 	# also reset offset to be safe.
@@ -168,3 +150,35 @@ static func parseConnections(srcId: int, srcConnectorId: int, conns: Array, netC
 
 func _on_center_pressed() -> void:
 	camera.offset = Vector2.ZERO
+
+
+func simulate() -> void:
+	_simulated_steps += 1
+	simulated_steps.text = str(_simulated_steps)
+
+	for index in components.get_child_count():
+		var child = components.get_child(index)
+		child.pre_simulate()
+
+	for index in connections.get_child_count():
+		var child = connections.get_child(index)
+		child.pre_simulate()
+
+	for index in components.get_child_count():
+		var child = components.get_child(index)
+		child.simulate()
+
+	for index in connections.get_child_count():
+		var child = connections.get_child(index)
+		child.dump_values()
+
+
+func _on_step_forward_pressed() -> void:
+	simulate()
+
+
+func _on_auto_step_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		timer.start()
+	else:
+		timer.stop()

@@ -1,12 +1,73 @@
 class_name Network
-extends Line2D
+extends Node2D
 
-var connection_points: Array[Vector2] = []
-var entities: Array = []  ## Array[CombinatorBase]
+var net_id: int
+#var connection_points: Array[Vector2] = []
+var wires: Array  ## Array[(NetNode, NetNode)]
+var entities: Dictionary = {} ## Dictionary[int, CombinatorBase]
+
+var type : int  ## [enum E.NetColorRED] or [enum E.NetColorGREEN]
+
+var values := {}  ## Current simulation values
+
+
+func _init(_net_id: int, _wires: Array, _entities: Dictionary, _type: int) -> void:
+	self.net_id = _net_id
+	self.wires = _wires
+	self.entities = _entities
+	self.type = _type
+	self.name = "Net-" + str(_net_id) + "-" + E.netColorToName(_type)
+
+
+func _enter_tree() -> void:
+	for wire in self.wires:
+		var src_node: NetNode = wire[0]
+		var dst_node: NetNode = wire[1]
+		var src_ent = entities[src_node.ent]
+		var dst_ent = entities[dst_node.ent]
+
+		src_ent.set_network(src_node.conn, self)
+		dst_ent.set_network(dst_node.conn, self)
+
+		var src = src_ent.get_conn_point(src_node.conn)
+		var dst = dst_ent.get_conn_point(dst_node.conn)
+
+		prints(src, "--", dst)
+
+		var line := Line2D.new()
+		line.width = 2
+		line.points = [src, dst]
+		match type:
+			E.NetColorRED: line.default_color = Color.RED
+			E.NetColorGREEN: line.default_color = Color.GREEN
+
+		add_child(line)
+		line.owner = self
+
+
+func add_values(values_to_add: Dictionary) -> void:
+	for k in values_to_add:
+		var value = values_to_add[k]
+		var v : int = values.get_or_add(k, 0)
+		values[k] = v + value
+
+
+func add_value(signal_name: String, value: int) -> void:
+	var v : int = values.get_or_add(signal_name, 0)
+	values[signal_name] = v + value
+
+
+func pre_simulate() -> void:
+	for k in values:
+		values[k] = 0
+
+
+func dump_values() -> void:
+	print(name, ": ", values)
 
 
 ## Create list of networks, and association from packed NetNode to network index.
-static func reorder(entries: Array):
+static func reorder(entries: Array, _entities: Dictionary):
 	# entries: [[se, sc, de, dc], ...]
 
 	var packed := []
@@ -15,12 +76,15 @@ static func reorder(entries: Array):
 		var d : int = NetNode.pack_values(pair[2], pair[3])
 		packed.append([s, d])
 
+	var net_instances := []
 	var networks := []  ## Array[Array[NetNode]]
 	var net_ids := {}  ## Dictionary[int, int]  # packed key of NetNode
 	while not packed.is_empty():
+		var _net_id = networks.size()
 		var tbd: Array = packed.pop_front()
 		var network := {}
-		_dig(packed, tbd[0], tbd[1], network)
+		var net_pairs := []
+		_dig(packed, tbd[0], tbd[1], network, net_pairs)
 
 		var r: Array[NetNode] = []
 		for k in network.keys():
@@ -30,12 +94,16 @@ static func reorder(entries: Array):
 			net_ids[k] = networks.size()
 			r.append(NetNode.unpack(k))
 
-		print("Net ", networks.size(), ": ", r)
+		print("Net ", _net_id, ": ", r)
+		print("-Wires: ", net_pairs)
 		networks.append(r)
+
+		var _type = E.enumToNetColor(r[0].conn)
+		net_instances.append(Network.new(_net_id, net_pairs, _filter_entities(_entities, r), _type))
 
 	var fmtd = dict_format(net_ids, NetNode.unpack, str)
 	prints("Net assoc:", fmtd)
-	return [networks, net_ids]
+	return [networks, net_ids, net_instances]
 
 
 static func dict_format(dict: Dictionary, key_formatter: Callable, value_formatter: Callable) -> String:
@@ -49,7 +117,7 @@ static func dict_format(dict: Dictionary, key_formatter: Callable, value_formatt
 
 
 # TODO: Consider tail-optimizing?
-static func _dig(packed: Array, src: int, dst: int, network: Dictionary):
+static func _dig(packed: Array, src: int, dst: int, network: Dictionary, net_pairs: Array):
 	var conn_pairs_to_source: Array = _pluck_all(packed, src)
 	var conn_pairs_to_dest: Array = _pluck_all(packed, dst)
 	# used as a Set
@@ -57,9 +125,11 @@ static func _dig(packed: Array, src: int, dst: int, network: Dictionary):
 	network[dst] = true
 
 	for pair in conn_pairs_to_source:
-		_dig(packed, pair[0], pair[1], network)
+		net_pairs.append([NetNode.unpack(pair[0]), NetNode.unpack(pair[1])])
+		_dig(packed, pair[0], pair[1], network, net_pairs)
 	for pair in conn_pairs_to_dest:
-		_dig(packed, pair[0], pair[1], network)
+		net_pairs.append([NetNode.unpack(pair[0]), NetNode.unpack(pair[1])])
+		_dig(packed, pair[0], pair[1], network, net_pairs)
 
 
 static func _pluck_all(from: Array, id: int) -> Array:
@@ -72,4 +142,13 @@ static func _pluck_all(from: Array, id: int) -> Array:
 			from.remove_at(p)
 		else:
 			p += 1
+	return r
+
+
+static func _filter_entities(_entities: Dictionary, net: Array[NetNode]) -> Dictionary:
+	var r := {}
+	for node in net:
+		var ent = _entities[node.ent]
+		if ent not in r:
+			r[node.ent] = ent
 	return r

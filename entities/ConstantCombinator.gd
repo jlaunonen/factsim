@@ -31,8 +31,10 @@ func _apply_config() -> void:
 	var cfg = _config
 	var constOutputs = cfg.controlBehavior.get("filters", [])
 	var txt := ""
+	_input_values.clear()
 	for out in constOutputs:
 		txt += parseSignalName(out["signal"]) + "=" + str(out["count"]) + "\n"
+		_input_values[parse_signal_key(out["signal"])] = out["count"]
 
 	label.text = txt
 
@@ -41,3 +43,9 @@ func _apply_config() -> void:
 
 func _on_button_toggled(toggled_on: bool) -> void:
 	_setBtnText(toggled_on)
+
+
+func simulate() -> void:
+	if _enabled:
+		_send_all_to_net(E.NetConnectorRED_1, _input_values)
+		_send_all_to_net(E.NetConnectorGREEN_1, _input_values)

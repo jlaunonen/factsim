@@ -13,9 +13,35 @@ const COLOR_PRIORITY = [
 	"black",
 ]
 
+static var _signal_priority: Array[String]
+static var _color_map: Dictionary
+
+static func _ensure_color_map(_colors: ColorDefs):
+	if _color_map == null or _color_map.is_empty():
+		_color_map = {}
+		_signal_priority = []
+		for k in COLOR_PRIORITY:
+			var v = _colors.get("sig_" + k)
+			if v == null:
+				v = Color.HOT_PINK
+
+			var sig_name = "virtual:signal-" + k
+			_color_map[sig_name] = v
+			_signal_priority.append(sig_name)
+
+
 @onready var indicator: Sprite2D = $"Circle"
 
 var _use_colors := false
+var _sig1 := ""
+var _sig2 := ""
+var _const := 0
+var _op := ""
+
+
+func _ready() -> void:
+	super()
+	_ensure_color_map(colors)
 
 
 func _apply_config() -> void:
@@ -31,59 +57,65 @@ func _apply_config() -> void:
 		return
 
 	var sig1 = cfg.get("first_signal", {})
-	var con1: int = cfg.get("constant", 0)
+	_const = cfg.get("constant", 0)
 
-	var op: String = cfg.get("comparator")
+	_op = cfg.get("comparator")
 
 	var sig2 = cfg.get("second_signal", {})
 
+	_sig1 = parse_signal_key(sig1)
+	_sig2 = parse_signal_key(sig2)
+
 	var txt := "{0} {1} {2}".format([
-		get_operand(sig1, con1),
-		op,
-		get_operand(sig2, con1),
+		get_operand(sig1, _const),
+		_op,
+		get_operand(sig2, _const),
 	])
 
 	label.text = txt
-	_apply_color(false, ["yellow", "red"])  # TODO: the list of active signals should come from simulation
 
 
-func _apply_color(on: bool, signals: Array[String]):
-	if on and _use_colors:
-		for s in COLOR_PRIORITY:
-			if s in signals:
-				indicator.modulate = _match_color(s)
+func _apply_color(on: bool, signals: Dictionary):
+	if not on:
+		indicator.modulate = colors.lamp_off
+		return
+	if _use_colors:
+		for s in _signal_priority:
+			if signals.get(s, 0):
+				indicator.modulate = _color_map[s]
 				return
-		indicator.modulate = Color.HOT_PINK
+	indicator.modulate = colors.lamp_on
+
+
+func pre_simulate() -> void:
+	_clear_and_copy_from_1()
+
+
+func simulate() -> void:
+	if const_cond(_input_values, _sig1, _sig2, _const, _op):
+		_apply_color(true, _input_values)
 	else:
-		indicator.modulate = colors.lamp_on if on else colors.lamp_off
+		_apply_color(false, {})
 
 
-func _match_color(signal_name: String) -> Color:
-	match signal_name:
-		"red": return colors.sig_red
-		"green": return colors.sig_green
-		"blue": return colors.sig_blue
-		"yellow": return colors.sig_yellow
-		"magenta": return colors.sig_magenta
-		"cyan": return colors.sig_cyan
-		"white": return colors.sig_white
-		"gray": return colors.sig_gray
-		"black": return colors.sig_black
+static func const_cond(signals: Dictionary, sig1: String, sig2: String, constant: int, condition) -> bool:
+	var lhs : int
+	var rhs : int
+	if sig1 and sig2:
+		lhs = signals.get(sig1, 0)
+		rhs = signals.get(sig2, 0)
+	elif sig1:
+		lhs = signals.get(sig1, 0)
+		rhs = constant
+	elif sig2:
+		lhs = constant
+		rhs = signals.get(sig2, 0)
 
-	return Color.HOT_PINK
-
-
-# TODO: Remove demo stuff
-var _p := 0.0
-var _c := ""
-func _process(delta: float) -> void:
-	_p += delta
-	if _p > (1 + COLOR_PRIORITY.size()) * 2.0:
-		_apply_color(false, [])
-		_c = ""
-		_p = 0.0
-	elif _p > 2.0:
-		var t = COLOR_PRIORITY[int((_p - 2.0) / 2.0)]
-		if _c != t:
-			_c = t
-			_apply_color(true, [t])
+	match condition:
+		"=": return lhs == rhs
+		"<": return lhs < rhs
+		">": return lhs > rhs
+		"!=": return lhs != rhs
+		"<=": return lhs <= rhs
+		">=": return lhs >= rhs
+		_: return false

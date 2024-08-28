@@ -18,6 +18,11 @@ var _rotated: int = 0
 
 var _connectors := [null, null, null, null]
 
+var _networks := [null, null, null, null]
+
+var _input_values := {}
+
+
 func _ready():
 	animator = find_child("AnimationPlayer")
 	c1_red = find_child("c1_red")
@@ -107,7 +112,57 @@ static func parseSignalName(sig: Dictionary) -> String:
 	return sigName.replace("signal-", "")
 
 
+static func parse_signal_key(sig: Dictionary) -> String:
+	if sig.is_empty():
+		return ""
+	return sig["type"] + ":" + sig["name"]
+
+
 static func get_operand(sig, constant) -> String:
 	if sig.is_empty():
 		return str(constant)
 	return parseSignalName(sig)
+
+
+func set_network(conn: int, network: Network) -> void:
+	_networks[conn] = network
+
+
+## Read-phase of simulation
+func pre_simulate() -> void:
+	pass
+
+
+## Actual simulation / writes
+func simulate() -> void:
+	pass
+
+
+func _clear_and_copy_from_1() -> void:
+	for k in _input_values:
+		_input_values[k] = 0
+
+	_copy_from(E.NetConnectorGREEN_1)
+	_copy_from(E.NetConnectorRED_1)
+
+
+func _copy_from(conn: int) -> void:
+	var net : Network = _networks[conn]
+	if net != null:
+		var values = net.values
+		for k in values:
+			var v = values[k]
+			var org = _input_values.get_or_add(k, 0)
+			_input_values[k] = org + v
+
+
+func _send_to_net(conn: int, out_signal: String, value: int) -> void:
+	var net: Network = _networks[conn]
+	if net != null:
+		net.add_value(out_signal, value)
+
+
+func _send_all_to_net(conn: int, values: Dictionary) -> void:
+	var net: Network = _networks[conn]
+	if net != null:
+		net.add_values(values)
