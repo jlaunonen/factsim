@@ -60,6 +60,7 @@ func _simulate() -> void:
 			values = each_rev(_input_values, _const1, _op)
 		_send_all_to_net(E.NetConnectorGREEN_2, values)
 		_send_all_to_net(E.NetConnectorRED_2, values)
+		_output_values = values
 	else:
 		# Single output.
 		var value: int
@@ -71,6 +72,7 @@ func _simulate() -> void:
 			value = proc(_input_values, _sig1, _sig2, _const1, _const2, _op)
 		_send_to_net(E.NetConnectorGREEN_2, _out, value)
 		_send_to_net(E.NetConnectorRED_2, _out, value)
+		_output_values[_out] = value
 
 
 static func proc(signals: Dictionary, sig1: String, sig2: String, constant1: int, constant2: int, operation) -> int:

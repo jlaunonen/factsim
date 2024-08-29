@@ -21,6 +21,9 @@ var _connectors := [null, null, null, null]
 var _networks := [null, null, null, null]
 
 var _input_values := {}
+var _output_values := {}
+
+var _listeners := []
 
 
 func _ready():
@@ -128,6 +131,15 @@ func set_network(conn: int, network: Network) -> void:
 	_networks[conn] = network
 
 
+func attach_listener(listener) -> void:
+	_listeners.append(listener)
+	listener.monitor(_input_values, _output_values)
+
+
+func remove_listener(listener) -> void:
+	_listeners.erase(listener)
+
+
 ## Read-phase of simulation
 func pre_simulate() -> void:
 	pass
@@ -136,6 +148,8 @@ func pre_simulate() -> void:
 ## Actual simulation / writes
 func simulate() -> void:
 	_simulate()
+	for l in _listeners:
+		l.monitor(_input_values, _output_values)
 
 
 func _simulate() -> void:

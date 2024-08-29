@@ -69,3 +69,6 @@ func _simulate() -> void:
 			value = _input_values.get(_out, 0)
 		_send_to_net(E.NetConnectorGREEN_2, _out, value)
 		_send_to_net(E.NetConnectorRED_2, _out, value)
+		_output_values[_out] = value
+	else:
+		_output_values[_out] = 0

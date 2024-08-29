@@ -6,6 +6,8 @@ class_name ConstantCombinator
 var _enabled := false
 var _constants := {}
 
+const NO_VALUES = {}
+
 
 func _ready():
 	super()
@@ -51,3 +53,6 @@ func _simulate() -> void:
 	if _enabled:
 		_send_all_to_net(E.NetConnectorRED_1, _constants)
 		_send_all_to_net(E.NetConnectorGREEN_1, _constants)
+		_output_values = _constants
+	else:
+		_output_values = NO_VALUES
