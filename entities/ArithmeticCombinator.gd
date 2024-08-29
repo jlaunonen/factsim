@@ -50,7 +50,7 @@ func pre_simulate() -> void:
 	_clear_and_copy_from_1()
 
 
-func simulate() -> void:
+func _simulate() -> void:
 	if _out == EACH_SIGNAL:
 		# Pairwise operations with a constant. May not have only one EACH at input.
 		var values: Dictionary

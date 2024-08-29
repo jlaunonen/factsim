@@ -46,7 +46,7 @@ func _on_button_toggled(toggled_on: bool) -> void:
 	_setBtnText(toggled_on)
 
 
-func simulate() -> void:
+func _simulate() -> void:
 	if _enabled:
 		_send_all_to_net(E.NetConnectorRED_1, _input_values)
 		_send_all_to_net(E.NetConnectorGREEN_1, _input_values)

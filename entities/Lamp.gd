@@ -91,7 +91,7 @@ func pre_simulate() -> void:
 	_clear_and_copy_from_1()
 
 
-func simulate() -> void:
+func _simulate() -> void:
 	if const_cond(_input_values, _sig1, _sig2, _const, _op):
 		_apply_color(true, _input_values)
 	else:

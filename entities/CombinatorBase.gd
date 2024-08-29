@@ -135,6 +135,10 @@ func pre_simulate() -> void:
 
 ## Actual simulation / writes
 func simulate() -> void:
+	_simulate()
+
+
+func _simulate() -> void:
 	pass
 
 

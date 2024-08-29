@@ -59,7 +59,7 @@ func pre_simulate() -> void:
 	_clear_and_copy_from_1()
 
 
-func simulate() -> void:
+func _simulate() -> void:
 	if _sig1 in SPECIALS or _sig2 in SPECIALS:
 		# TODO
 		pass
