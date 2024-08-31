@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://tg82u0uacdsj"]
+[gd_scene load_steps=7 format=3 uid="uid://tg82u0uacdsj"]
 
 [ext_resource type="Script" path="res://entities/ArithmeticCombinator.gd" id="1_gehq1"]
 [ext_resource type="Texture2D" uid="uid://c381b46a1le7a" path="res://circle.svg" id="1_nikj6"]
@@ -37,6 +37,9 @@ _data = {
 "RESET": SubResource("Animation_c4feu"),
 "orientation": ExtResource("2_pedei")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f73e4"]
+size = Vector2(96, 224)
 
 [node name="ArithmeticCombinator" type="Line2D"]
 points = PackedVector2Array(-48, -112, -48, 112, 48, 112, 48, -112)
@@ -90,3 +93,13 @@ libraries = {
 "": SubResource("AnimationLibrary_2xxhs")
 }
 speed_scale = 0.0
+
+[node name="Area2D" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_f73e4")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

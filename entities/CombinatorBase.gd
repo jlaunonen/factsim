@@ -6,6 +6,7 @@ var colors: ColorDefs
 @onready var label: Label = $"Label"
 var animator: AnimationPlayer
 
+var entity_id: int = -1
 var c1_red: Node2D
 var c1_green: Node2D
 
@@ -85,6 +86,7 @@ func set_conn_highlight(connector: int, highlighted: bool) -> void:
 
 func set_config(cfg: BpLoader.EntityDto):
 	_config = cfg
+	entity_id = cfg.number
 	_rotated = int(cfg.direction / 2.0)
 
 	_fix_properties()
@@ -184,3 +186,22 @@ func _send_all_to_net(conn: int, values: Dictionary) -> void:
 	var net: Network = _networks[conn]
 	if net != null:
 		net.add_values(values)
+
+# Component events
+
+signal component_hover(entity)
+signal component_blur(entity)
+signal component_clicked(entity, event: InputEvent)
+
+
+func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		component_clicked.emit(self, event)
+
+
+func _on_area_2d_mouse_entered() -> void:
+	component_hover.emit(self)
+
+
+func _on_area_2d_mouse_exited() -> void:
+	component_blur.emit(self)

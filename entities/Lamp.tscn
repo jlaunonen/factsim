@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bwt4du6dpwp0a"]
+[gd_scene load_steps=7 format=3 uid="uid://bwt4du6dpwp0a"]
 
 [ext_resource type="Script" path="res://entities/Lamp.gd" id="1_2x5xh"]
 [ext_resource type="Texture2D" uid="uid://c381b46a1le7a" path="res://circle.svg" id="1_iwur0"]
@@ -65,6 +65,9 @@ _data = {
 "orientation": SubResource("Animation_nh026")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p8y7j"]
+size = Vector2(96, 96)
+
 [node name="Lamp" type="Line2D"]
 points = PackedVector2Array(-48, -48, -48, 48, 48, 48, 48, -48)
 closed = true
@@ -105,3 +108,13 @@ libraries = {
 "": SubResource("AnimationLibrary_22gqv")
 }
 speed_scale = 0.0
+
+[node name="Area2D" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_p8y7j")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
