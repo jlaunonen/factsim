@@ -87,6 +87,8 @@ func _load_bp(bp):
 		return
 	if bp is JSON:
 		bp = BpLoader.BlueprintDto.new(bp.data.get("blueprint"))
+	if bp is Dictionary:
+		bp = BpLoader.BlueprintDto.new(bp.get("blueprint"))
 
 	_simulated_steps = 0
 	simulated_steps.text = str(0)
