@@ -47,6 +47,7 @@ var _entityScenes = {
 
 
 var _simulated_steps := 0
+var _is_auto_stepping := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -175,7 +176,7 @@ func simulate() -> void:
 		var child = components.get_child(index)
 		child.simulate()
 
-	if timer.wait_time > 0.1 or timer.is_stopped():
+	if timer.wait_time > 0.1 or not _is_auto_stepping:
 		for index in connections.get_child_count():
 			var child = connections.get_child(index)
 			child.dump_values()
@@ -186,6 +187,7 @@ func _on_step_forward_pressed() -> void:
 
 
 func _on_auto_step_toggled(toggled_on: bool) -> void:
+	_is_auto_stepping = toggled_on
 	if toggled_on:
 		timer.start()
 	else:
@@ -195,7 +197,7 @@ func _on_auto_step_toggled(toggled_on: bool) -> void:
 func _on_sim_speed_slider_value_changed(value: float) -> void:
 	var new_timeout := 1.0 / value
 	timer.wait_time = new_timeout
-	if not timer.is_stopped() and (value < 3 or timer.time_left > new_timeout):
+	if _is_auto_stepping and (value < 3 or timer.time_left > new_timeout):
 		timer.stop()
 		timer.start()
 	simulation_speed_label.text = str(round(value * 10.0) / 10.0)
