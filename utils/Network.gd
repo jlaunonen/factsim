@@ -148,7 +148,7 @@ static func _pluck_all(from: Array, id: int) -> Array:
 static func _filter_entities(_entities: Dictionary, net: Array[NetNode]) -> Dictionary:
 	var r := {}
 	for node in net:
-		var ent = _entities[node.ent]
-		if ent not in r:
+		var ent = _entities.get(node.ent)
+		if ent != null && ent not in r:
 			r[node.ent] = ent
 	return r
