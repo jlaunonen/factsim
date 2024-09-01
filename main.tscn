@@ -205,6 +205,18 @@ grow_vertical = 2
 [node name="hoverMonitor" parent="CanvasLayer" instance=ExtResource("8_njhtd")]
 position = Vector2(1400, 888)
 
+[node name="upsLabel" type="Label" parent="CanvasLayer"]
+custom_minimum_size = Vector2(80, 0)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -282.855
+offset_right = -229.855
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "-- UPS / -- FPS"
+horizontal_alignment = 2
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(800, 450)
 script = ExtResource("6_jsvw5")
@@ -212,9 +224,13 @@ script = ExtResource("6_jsvw5")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
 
+[node name="upsTimer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="pressed" from="CanvasLayer/loadBluePrint" to="." method="_on_load_blue_print_pressed"]
 [connection signal="item_selected" from="CanvasLayer/netOptions" to="." method="_on_net_options_item_selected"]
 [connection signal="pressed" from="CanvasLayer/center" to="." method="_on_center_pressed"]
 [connection signal="pressed" from="CanvasLayer/stepForward" to="." method="_on_step_forward_pressed"]
 [connection signal="toggled" from="CanvasLayer/autoStep" to="." method="_on_auto_step_toggled"]
 [connection signal="value_changed" from="CanvasLayer/simSpeedSlider" to="." method="_on_sim_speed_slider_value_changed"]
+[connection signal="timeout" from="upsTimer" to="." method="_on_ups_timer_timeout"]

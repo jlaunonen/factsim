@@ -37,6 +37,7 @@ var _entityScenes = {
 @onready var netVisualization: OptionButton = $"CanvasLayer/netOptions"
 @onready var camera: Camera2D = $"Camera2D"
 @onready var timer: Timer = $"Timer"
+@onready var ups_label: Label = $"CanvasLayer/upsLabel"
 
 @onready var components: Node2D = $"components"
 @onready var connections: Node2D = $"connections"
@@ -48,6 +49,8 @@ var _entityScenes = {
 
 var _simulated_steps := 0
 var _is_auto_stepping := false
+var _simulations_per_time := 0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -162,6 +165,7 @@ func _on_center_pressed() -> void:
 
 func simulate() -> void:
 	_simulated_steps += 1
+	_simulations_per_time += 1
 	simulated_steps.text = str(_simulated_steps)
 
 	for index in components.get_child_count():
@@ -219,3 +223,9 @@ func _on_entity_blur(entity) -> void:
 		hover_monitor.clear()
 		_current_detailed_entity = null
 
+
+func _on_ups_timer_timeout() -> void:
+	var sims = _simulations_per_time
+	_simulations_per_time = 0
+
+	ups_label.text = "{0} UPS / {1} FPS".format([sims, Performance.get_monitor(Performance.TIME_FPS)])
