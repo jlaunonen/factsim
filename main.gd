@@ -105,6 +105,7 @@ func _load_bp(bp):
 		var s = _entityScenes.get(ent.name, _fallbackScene)
 
 		var n = s.instantiate()
+		n.name += "-" + str(ent.number)
 		n.colors = colors
 		n.position = ent.position * GRID_SIZE
 		n.set_config(ent)
