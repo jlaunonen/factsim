@@ -28,6 +28,7 @@ var _entityScenes = {
 	"medium-electric-pole": preload("res://entities/MediumPole.tscn"),
 	"big-electric-pole": preload("res://entities/BigPole.tscn"),
 }
+var _fallbackScene = preload("res://entities/Placeholder.tscn")
 
 ## Shared color definitions (read by [method CombinatorBase._ready]).
 @export var colors: ColorDefs
@@ -101,31 +102,31 @@ func _load_bp(bp):
 
 	var _bpArea = null
 	for ent: BpLoader.EntityDto in bp.entities:
-		var s = _entityScenes.get(ent.name)
-		if s != null:
-			var n = s.instantiate()
-			n.colors = colors
-			n.position = ent.position * GRID_SIZE
-			n.set_config(ent)
-			components.add_child(n)
+		var s = _entityScenes.get(ent.name, _fallbackScene)
 
-			entities[ent.number] = n
+		var n = s.instantiate()
+		n.colors = colors
+		n.position = ent.position * GRID_SIZE
+		n.set_config(ent)
+		components.add_child(n)
 
-			if ent.connection1 != null:
-				netParts.append_array(parseConnections(ent.number, E.NetConnectorRED_1, ent.connection1.red, E.NetColorRED))
-				netParts.append_array(parseConnections(ent.number, E.NetConnectorGREEN_1, ent.connection1.green, E.NetColorGREEN))
-			if ent.connection2 != null:
-				netParts.append_array(parseConnections(ent.number, E.NetConnectorRED_2, ent.connection2.red, E.NetColorRED))
-				netParts.append_array(parseConnections(ent.number, E.NetConnectorGREEN_2, ent.connection2.green, E.NetColorGREEN))
+		entities[ent.number] = n
 
-			var entityRect = n.transform * n.get_rect()
-			if _bpArea != null:
-				_bpArea = _bpArea.merge(entityRect)
-			else:
-				_bpArea = entityRect
+		if ent.connection1 != null:
+			netParts.append_array(parseConnections(ent.number, E.NetConnectorRED_1, ent.connection1.red, E.NetColorRED))
+			netParts.append_array(parseConnections(ent.number, E.NetConnectorGREEN_1, ent.connection1.green, E.NetColorGREEN))
+		if ent.connection2 != null:
+			netParts.append_array(parseConnections(ent.number, E.NetConnectorRED_2, ent.connection2.red, E.NetColorRED))
+			netParts.append_array(parseConnections(ent.number, E.NetConnectorGREEN_2, ent.connection2.green, E.NetColorGREEN))
 
-			n.component_hover.connect(_on_entity_hover)
-			n.component_blur.connect(_on_entity_blur)
+		var entityRect = n.transform * n.get_rect()
+		if _bpArea != null:
+			_bpArea = _bpArea.merge(entityRect)
+		else:
+			_bpArea = entityRect
+
+		n.component_hover.connect(_on_entity_hover)
+		n.component_blur.connect(_on_entity_blur)
 
 	prints("Rawnet:", netParts)
 	var netresult = Network.reorder(netParts, entities)
