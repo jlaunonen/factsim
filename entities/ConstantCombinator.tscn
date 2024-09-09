@@ -1,7 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://i3ycu10a4fla"]
+[gd_scene load_steps=8 format=3 uid="uid://i3ycu10a4fla"]
 
 [ext_resource type="Texture2D" uid="uid://c381b46a1le7a" path="res://circle.svg" id="1_8u3lh"]
 [ext_resource type="Script" path="res://entities/ConstantCombinator.gd" id="1_cdh2b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vsbb7"]
+bg_color = Color(9.62615e-08, 0.458338, 0.621811, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [sub_resource type="Animation" id="Animation_yrdms"]
 length = 0.001
@@ -178,9 +185,10 @@ offset_top = -40.0
 offset_right = 20.0
 offset_bottom = -9.0
 pivot_offset = Vector2(20, 16)
+theme_override_styles/pressed = SubResource("StyleBoxFlat_vsbb7")
 toggle_mode = true
 action_mode = 0
-text = "ON"
+text = "OFF"
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="."]
