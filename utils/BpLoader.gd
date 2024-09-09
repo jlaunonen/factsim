@@ -104,7 +104,10 @@ static func loadBpString(bp: String):
 
 	var compressed: PackedByteArray = Marshalls.base64_to_raw(bp.substr(1))
 	var json = decodeBp(compressed)
-	return BlueprintDto.new(json.get("blueprint"))
+	var blueprint = json.get("blueprint")
+	if blueprint != null:
+		return BlueprintDto.new(blueprint)
+	print("Not a singular blueprint")
 
 
 static func openBp(bpFilename: String):
