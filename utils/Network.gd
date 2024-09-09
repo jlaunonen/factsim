@@ -81,10 +81,9 @@ static func reorder(entries: Array, _entities: Dictionary):
 	var net_ids := {}  ## Dictionary[int, int]  # packed key of NetNode
 	while not packed.is_empty():
 		var _net_id = networks.size()
-		var tbd: Array = packed.pop_front()
 		var network := {}
 		var net_pairs := []
-		_dig(packed, tbd[0], tbd[1], network, net_pairs)
+		_dig(packed, network, net_pairs)
 
 		var r: Array[NetNode] = []
 		for k in network.keys():
@@ -116,20 +115,26 @@ static func dict_format(dict: Dictionary, key_formatter: Callable, value_formatt
 	return "{" + ", ".join(r) + "}"
 
 
-# TODO: Consider tail-optimizing?
-static func _dig(packed: Array, src: int, dst: int, network: Dictionary, net_pairs: Array):
-	var conn_pairs_to_source: Array = _pluck_all(packed, src)
-	var conn_pairs_to_dest: Array = _pluck_all(packed, dst)
-	# used as a Set
-	network[src] = true
-	network[dst] = true
+static func _dig(packed: Array, network: Dictionary, net_pairs: Array):
+	var todo_list := [packed.pop_front()]
+	var pos := 0
+	while pos < todo_list.size():
+		var src = todo_list[pos][0]
+		var dst = todo_list[pos][1]
 
-	for pair in conn_pairs_to_source:
-		net_pairs.append([NetNode.unpack(pair[0]), NetNode.unpack(pair[1])])
-		_dig(packed, pair[0], pair[1], network, net_pairs)
-	for pair in conn_pairs_to_dest:
-		net_pairs.append([NetNode.unpack(pair[0]), NetNode.unpack(pair[1])])
-		_dig(packed, pair[0], pair[1], network, net_pairs)
+		var conn_pairs_to_source: Array = _pluck_all(packed, src)
+		todo_list.append_array(conn_pairs_to_source)
+
+		var conn_pairs_to_dest: Array = _pluck_all(packed, dst)
+		todo_list.append_array(conn_pairs_to_dest)
+
+		# used as a Set
+		network[src] = true
+		network[dst] = true
+
+		net_pairs.append([NetNode.unpack(src), NetNode.unpack(dst)])
+
+		pos += 1
 
 
 static func _pluck_all(from: Array, id: int) -> Array:
