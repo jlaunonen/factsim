@@ -113,6 +113,8 @@ func _load_bp(bp):
 
 		entities[ent.number] = n
 
+		# BP's contain connections to both directions, thus this logic
+		# will create logical duplicates. They are deduplicated later in reorder.
 		if ent.connection1 != null:
 			netParts.append_array(parseConnections(ent.number, E.NetConnectorRED_1, ent.connection1.red, E.NetColorRED))
 			netParts.append_array(parseConnections(ent.number, E.NetConnectorGREEN_1, ent.connection1.green, E.NetColorGREEN))

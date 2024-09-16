@@ -117,10 +117,24 @@ static func dict_format(dict: Dictionary, key_formatter: Callable, value_formatt
 
 static func _dig(packed: Array, network: Dictionary, net_pairs: Array):
 	var todo_list := [packed.pop_front()]
+	var populated := []
 	var pos := 0
 	while pos < todo_list.size():
 		var src = todo_list[pos][0]
 		var dst = todo_list[pos][1]
+
+		# Since the raw network contains "connections" in both directions,
+		# we want to de-duplicate them to avoid creating multiple wires
+		# between same connectors.
+		var do_skip := false
+		for p in populated:
+			if p[0] == dst and p[1] == src:
+				do_skip = true
+				break
+		if do_skip:
+			pos += 1
+			continue
+		populated.append([src, dst])
 
 		var conn_pairs_to_source: Array = _pluck_all(packed, src)
 		todo_list.append_array(conn_pairs_to_source)
