@@ -84,6 +84,43 @@ func set_conn_highlight(connector: int, highlighted: bool) -> void:
 		c.modulate = netcolor
 
 
+var _original_color
+func set_entity_highlight(highlighted: bool) -> void:
+	if _original_color == null:
+		_original_color = default_color
+
+	if highlighted:
+		default_color = Color.WHITE
+	else:
+		default_color = _original_color
+
+
+func move_with_connections(new_position: Vector2) -> void:
+	position = new_position
+	_move_all_net_segements()
+
+
+func rotate_with_connections() -> void:
+	if animator != null:
+		_rotated = (_rotated + 1) % 4
+		animator.seek(float(_rotated), true)
+		_move_all_net_segements()
+
+
+func _move_all_net_segements() -> void:
+	_move_net_segments(E.NetConnectorRED_1)
+	_move_net_segments(E.NetConnectorRED_2)
+	_move_net_segments(E.NetConnectorGREEN_1)
+	_move_net_segments(E.NetConnectorGREEN_2)
+
+
+func _move_net_segments(conn: int) -> void:
+	var net = _networks[conn]
+	if net != null:
+		var net_node = NetNode.pack_values(entity_id, conn)
+		net.move_segments(net_node, get_conn_point(conn))
+
+
 func set_config(cfg: BpLoader.EntityDto):
 	_config = cfg
 	entity_id = cfg.number

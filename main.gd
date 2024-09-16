@@ -45,7 +45,7 @@ var _fallbackScene = preload("res://entities/Placeholder.tscn")
 @onready var routes: Node2D = $"routes"
 @onready var simulated_steps: Label = $"CanvasLayer/simulatedSteps"
 @onready var simulation_speed_label: Label = $"CanvasLayer/simSpeedLabel"
-@onready var hover_monitor = $"CanvasLayer/hoverMonitor"
+@onready var selection_manager = $"Selection"
 
 
 var _simulated_steps := 0
@@ -128,8 +128,8 @@ func _load_bp(bp):
 		else:
 			_bpArea = entityRect
 
-		n.component_hover.connect(_on_entity_hover)
-		n.component_blur.connect(_on_entity_blur)
+		n.component_hover.connect(selection_manager.on_entity_hover)
+		n.component_blur.connect(selection_manager.on_entity_blur)
 
 	prints("Rawnet:", netParts)
 	var netresult = Network.reorder(netParts, entities)
@@ -211,23 +211,6 @@ func _on_sim_speed_slider_value_changed(value: float) -> void:
 		timer.stop()
 		timer.start()
 	simulation_speed_label.text = str(round(value * 10.0) / 10.0)
-
-
-var _current_detailed_entity
-
-func _on_entity_hover(entity) -> void:
-	if _current_detailed_entity != null and _current_detailed_entity != entity:
-		_current_detailed_entity.remove_listener(hover_monitor)
-	_current_detailed_entity = entity
-	entity.attach_listener(hover_monitor)
-	hover_monitor.set_component_id(entity.entity_id)
-
-
-func _on_entity_blur(entity) -> void:
-	if _current_detailed_entity == entity:
-		entity.remove_listener(hover_monitor)
-		hover_monitor.clear()
-		_current_detailed_entity = null
 
 
 func _on_ups_timer_timeout() -> void:

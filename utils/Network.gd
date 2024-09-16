@@ -5,6 +5,7 @@ var net_id: int
 #var connection_points: Array[Vector2] = []
 var wires: Array  ## Array[(NetNode, NetNode)]
 var entities: Dictionary = {} ## Dictionary[int, CombinatorBase]
+var connectors_to_segments: Dictionary = {}  ## Dictionary[NetNode:int, List[[Line2D, int]]]
 
 var type : int  ## [enum E.NetColorRED] or [enum E.NetColorGREEN]
 
@@ -43,6 +44,18 @@ func _enter_tree() -> void:
 
 		add_child(line)
 		line.owner = self
+
+		connectors_to_segments.get_or_add(src_node.pack(), []).append([line, 0])
+		connectors_to_segments.get_or_add(dst_node.pack(), []).append([line, 1])
+
+
+func move_segments(net_node: int, new_point: Vector2) -> void:
+	var segments = connectors_to_segments[net_node]
+	for seg in segments:
+		var line: Line2D = seg[0]
+		var endpoint: int = seg[1]
+
+		line.points[endpoint] = new_point
 
 
 func add_values(values_to_add: Dictionary) -> void:

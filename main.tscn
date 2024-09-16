@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b4vgnls7asr22"]
+[gd_scene load_steps=12 format=3 uid="uid://b4vgnls7asr22"]
 
 [ext_resource type="PackedScene" uid="uid://i3ycu10a4fla" path="res://entities/ConstantCombinator.tscn" id="1_35puf"]
 [ext_resource type="Script" path="res://main.gd" id="1_gm5m1"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://camera_2d.gd" id="6_jsvw5"]
 [ext_resource type="PackedScene" uid="uid://caqbxnwbxamtu" path="res://entities/SmallPole.tscn" id="6_jtjkr"]
 [ext_resource type="PackedScene" uid="uid://dau3ailwo23fj" path="res://utils/Monitor.tscn" id="8_njhtd"]
+[ext_resource type="Script" path="res://selection.gd" id="9_j7f6b"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_yg81n"]
 vertices = PackedVector2Array(886, 406, 10, 406, 10, 18, 886, 18)
@@ -226,6 +227,9 @@ wait_time = 0.1
 
 [node name="upsTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="Selection" type="Node2D" parent="."]
+script = ExtResource("9_j7f6b")
 
 [connection signal="pressed" from="CanvasLayer/loadBluePrint" to="." method="_on_load_blue_print_pressed"]
 [connection signal="item_selected" from="CanvasLayer/netOptions" to="." method="_on_net_options_item_selected"]
