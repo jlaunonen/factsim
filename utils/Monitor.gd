@@ -1,8 +1,8 @@
-extends Node2D
+extends PanelContainer
 
-@onready var name_label : Label = $"PanelContainer/VBoxContainer/HBoxContainer/nameLabel"
-@onready var text_in : TextEdit = $"PanelContainer/VBoxContainer/TextEdit"
-@onready var text_out : TextEdit = $"PanelContainer/VBoxContainer/TextEdit2"
+@onready var name_label : Label = $"VBoxContainer/HBoxContainer/nameLabel"
+@onready var text_in : TextEdit = $"VBoxContainer/TextEdit"
+@onready var text_out : TextEdit = $"VBoxContainer/TextEdit2"
 
 func _ready() -> void:
 	pass

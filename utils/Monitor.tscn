@@ -2,10 +2,7 @@
 
 [ext_resource type="Script" path="res://utils/Monitor.gd" id="1_1bdku"]
 
-[node name="Node2D" type="Node2D"]
-script = ExtResource("1_1bdku")
-
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -16,41 +13,42 @@ offset_top = -228.0
 offset_right = 128.0
 grow_horizontal = 2
 grow_vertical = 0
+script = ExtResource("1_1bdku")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "In"
 
-[node name="nameLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="nameLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "X"
 
-[node name="TextEdit" type="TextEdit" parent="PanelContainer/VBoxContainer"]
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_readonly_color = Color(1, 1, 1, 1)
 placeholder_text = "No signals"
 editable = false
 
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Out"
 
-[node name="TextEdit2" type="TextEdit" parent="PanelContainer/VBoxContainer"]
+[node name="TextEdit2" type="TextEdit" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_readonly_color = Color(1, 1, 1, 1)
@@ -59,6 +57,7 @@ editable = false
 
 [node name="Line2D" type="Line2D" parent="."]
 visible = false
+position = Vector2(128, 228)
 points = PackedVector2Array(0, 0, 0, 100)
 width = 6.0
 begin_cap_mode = 2
