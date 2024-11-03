@@ -27,6 +27,7 @@ var _entityScenes = {
 	"small-electric-pole": preload("res://entities/SmallPole.tscn"),
 	"medium-electric-pole": preload("res://entities/MediumPole.tscn"),
 	"big-electric-pole": preload("res://entities/BigPole.tscn"),
+	"substation": preload("res://entities/Substation.tscn"),
 }
 var _fallbackScene = preload("res://entities/Placeholder.tscn")
 
