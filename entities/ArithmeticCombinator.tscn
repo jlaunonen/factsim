@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://tg82u0uacdsj"]
+[gd_scene load_steps=8 format=3 uid="uid://tg82u0uacdsj"]
 
 [ext_resource type="Script" path="res://entities/ArithmeticCombinator.gd" id="1_gehq1"]
 [ext_resource type="Texture2D" uid="uid://c381b46a1le7a" path="res://circle.svg" id="1_nikj6"]
 [ext_resource type="Animation" uid="uid://cqlpkv0r5l2t7" path="res://combinator-orientation.res" id="2_pedei"]
+[ext_resource type="Texture2D" uid="uid://31h3k4c4bp1r" path="res://circle2.svg" id="3_3okcg"]
 
 [sub_resource type="Animation" id="Animation_c4feu"]
 length = 0.001
@@ -67,14 +68,14 @@ modulate = Color(1, 0, 0, 1)
 z_index = 1
 position = Vector2(-16, 96)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_nikj6")
+texture = ExtResource("3_3okcg")
 
 [node name="c1_green" type="Sprite2D" parent="."]
 modulate = Color(0, 1, 0, 1)
 z_index = 1
 position = Vector2(16, 96)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_nikj6")
+texture = ExtResource("3_3okcg")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -40.0

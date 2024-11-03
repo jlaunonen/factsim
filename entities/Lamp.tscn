@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwt4du6dpwp0a"]
+[gd_scene load_steps=8 format=3 uid="uid://bwt4du6dpwp0a"]
 
 [ext_resource type="Script" path="res://entities/Lamp.gd" id="1_2x5xh"]
 [ext_resource type="Texture2D" uid="uid://c381b46a1le7a" path="res://circle.svg" id="1_iwur0"]
+[ext_resource type="Texture2D" uid="uid://31h3k4c4bp1r" path="res://circle2.svg" id="2_qkrfc"]
 
 [sub_resource type="Animation" id="Animation_la3df"]
 length = 0.001
@@ -80,18 +81,18 @@ modulate = Color(1, 0, 0, 1)
 z_index = 1
 position = Vector2(-16, 32)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_iwur0")
+texture = ExtResource("2_qkrfc")
 
 [node name="c1_green" type="Sprite2D" parent="."]
 modulate = Color(0, 1, 0, 1)
 z_index = 1
 position = Vector2(16, 32)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_iwur0")
+texture = ExtResource("2_qkrfc")
 
 [node name="Circle" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("1_iwur0")
 
 [node name="Label" type="Label" parent="."]

@@ -2,22 +2,19 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="32"
-   height="32"
-   viewBox="0 0 8.4666665 8.4666666"
+   width="40"
+   height="40"
+   viewBox="0 0 40 40"
    version="1.1"
    id="svg1"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <defs
      id="defs1" />
-  <g
-     id="layer1">
-    <circle
-       style="fill:#a4a4a4;fill-opacity:1;stroke:#ffffff;stroke-width:1.05833;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;stroke-dashoffset:11.6;stroke-opacity:1"
-       id="path1"
-       cx="4.2548556"
-       cy="4.2543902"
-       r="3.7041667" />
-  </g>
+  <circle
+     style="fill:#a4a4a4;fill-opacity:1;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;stroke-dashoffset:11.6;stroke-opacity:1"
+     id="path1"
+     cx="20"
+     cy="20"
+     r="17" />
 </svg>
