@@ -91,6 +91,10 @@ func _load_bp(bp):
 		bp = BpLoader.BlueprintDto.new(bp.data.get("blueprint"))
 	if bp is Dictionary:
 		bp = BpLoader.BlueprintDto.new(bp.get("blueprint"))
+	print("Loaded v{0} data".format([bp.version_str()]))
+	if bp.vmaj > 1:
+		print("Cannot process too new data")
+		return
 
 	_simulated_steps = 0
 	simulated_steps.text = str(0)

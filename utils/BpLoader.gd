@@ -3,16 +3,31 @@ class_name BpLoader
 
 # https://wiki.factorio.com/Blueprint_string_format
 class BlueprintDto:
-	var label: String
+	var label # String
 	var description # String
 	var entities: Array
 
+	var version: int
+	var vmaj: int
+	var vmin: int
+	var vpatch: int
+	var vdev: int
+
 	func _init(map: Dictionary = {}) -> void:
+		self.version = map["version"]
+		self.vmaj = self.version >> 48
+		self.vmin = (self.version >> 32) & 0xffff
+		self.vpatch = (self.version >> 16) & 0xffff
+		self.vdev = self.version & 0xffff
+
 		self.label = map.get("label")
 		self.description = map.get("description")
 
 		var entArray = map.get("entities") as Array
 		self.entities = entArray.map(EntityDto.new)
+
+	func version_str() -> String:
+		return "{0}.{1}.{2}.{3}".format([self.vmaj, self.vmin, self.vpatch, self.vdev])
 
 	func _to_string() -> String:
 		var ents = self.entities.reduce((func (acc, el):
