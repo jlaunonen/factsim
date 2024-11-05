@@ -87,7 +87,7 @@ func _apply_color(on: bool, signals: Dictionary):
 	indicator.modulate = colors.lamp_on
 
 
-func pre_simulate() -> void:
+func post_simulate() -> void:
 	_clear_and_copy_from_1()
 
 

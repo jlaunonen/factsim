@@ -179,17 +179,20 @@ func simulate() -> void:
 	_simulations_per_time += 1
 	simulated_steps.text = str(_simulated_steps)
 
-	for index in components.get_child_count():
-		var child = components.get_child(index)
-		child.pre_simulate()
-
+	# Zero out networks so new values can be written into them.
 	for index in connections.get_child_count():
 		var child = connections.get_child(index)
 		child.pre_simulate()
 
+	# Process entities; will directly output to networks.
 	for index in components.get_child_count():
 		var child = components.get_child(index)
 		child.simulate()
+
+	# Copy network values to buffers for next simulation.
+	for index in components.get_child_count():
+		var child = components.get_child(index)
+		child.post_simulate()
 
 	if timer.wait_time > 0.1 or not _is_auto_stepping:
 		for index in connections.get_child_count():

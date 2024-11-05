@@ -180,7 +180,7 @@ func remove_listener(listener) -> void:
 
 
 ## Read-phase of simulation
-func pre_simulate() -> void:
+func post_simulate() -> void:
 	pass
 
 

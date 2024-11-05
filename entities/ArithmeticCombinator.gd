@@ -46,7 +46,7 @@ func _apply_config() -> void:
 	label.text = txt
 
 
-func pre_simulate() -> void:
+func post_simulate() -> void:
 	_clear_and_copy_from_1()
 
 
