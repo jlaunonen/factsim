@@ -42,6 +42,7 @@ var _op := ""
 func _ready() -> void:
 	super()
 	_ensure_color_map(colors)
+	_apply_color(false, {})
 
 
 func _apply_config() -> void:
