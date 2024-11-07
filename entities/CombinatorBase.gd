@@ -25,6 +25,7 @@ var _input_values := {}
 var _output_values := {}
 
 var _listeners := []
+var _host: Node2D  ## SimulationHost
 
 
 func _ready():
@@ -39,10 +40,13 @@ func _ready():
 	_connectors[E.NetConnectorGREEN_1] = c1_green
 	_connectors[E.NetConnectorGREEN_2] = c2_green
 
+	var host = find_parent("SimulationHost")
+	if host != null:
+		_host = host
+
 	if colors == null:
 		# Usually the shared colors instance is already set at this point, but if the node is present
 		# in the main scene at start, they are not so try to read them from parent.
-		var host = find_parent("SimulationHost")
 		if host != null:
 			var host_colors = host.get("colors")
 			if host_colors != null:

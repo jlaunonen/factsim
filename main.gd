@@ -52,6 +52,7 @@ var _fallbackScene = preload("res://entities/Placeholder.tscn")
 var _simulated_steps := 0
 var _is_auto_stepping := false
 var _simulations_per_time := 0
+var is_night := false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -63,6 +64,7 @@ func _ready() -> void:
 
 	_load_bp(preload("res://initial.json"))
 	_on_sim_speed_slider_value_changed($"CanvasLayer/simSpeedSlider".value)
+	_on_day_night_toggled(is_night)
 
 
 func _on_timer_timeout() -> void:
@@ -226,3 +228,10 @@ func _on_ups_timer_timeout() -> void:
 	_simulations_per_time = 0
 
 	ups_label.text = "{0} UPS / {1} FPS".format([sims, Performance.get_monitor(Performance.TIME_FPS)])
+
+
+func _on_day_night_toggled(toggled_on: bool) -> void:
+	is_night = toggled_on
+	match is_night:
+		false: $"CanvasLayer/dayNight".text = "Day"
+		true: $"CanvasLayer/dayNight".text = "Night"

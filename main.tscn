@@ -223,6 +223,19 @@ grow_horizontal = 0
 text = "-- UPS / -- FPS"
 horizontal_alignment = 2
 
+[node name="dayNight" type="Button" parent="CanvasLayer"]
+custom_minimum_size = Vector2(60, 0)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -288.0
+offset_top = 32.0
+offset_right = -228.0
+offset_bottom = 63.0
+grow_horizontal = 0
+toggle_mode = true
+text = "Night"
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(800, 450)
 script = ExtResource("6_jsvw5")
@@ -242,4 +255,5 @@ script = ExtResource("9_j7f6b")
 [connection signal="pressed" from="CanvasLayer/stepForward" to="." method="_on_step_forward_pressed"]
 [connection signal="toggled" from="CanvasLayer/autoStep" to="." method="_on_auto_step_toggled"]
 [connection signal="value_changed" from="CanvasLayer/simSpeedSlider" to="." method="_on_sim_speed_slider_value_changed"]
+[connection signal="toggled" from="CanvasLayer/dayNight" to="." method="_on_day_night_toggled"]
 [connection signal="timeout" from="upsTimer" to="." method="_on_ups_timer_timeout"]
