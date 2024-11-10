@@ -59,7 +59,7 @@ func _simulate() -> void:
 	if _sig1 in SPECIALS or _sig2 in SPECIALS:
 		# TODO
 		pass
-	elif Lamp.const_cond(_input_values, _sig1, _sig2, _const, _op):
+	elif Lamp.cond(_get_lhs(), _get_rhs(), _op):
 		var value := 1
 		if _copy_input:
 			value = _input_values.get(_out, 0)
@@ -68,3 +68,15 @@ func _simulate() -> void:
 		_output_values[_out] = value
 	else:
 		_output_values[_out] = 0
+
+
+func _get_lhs() -> int:
+	if _sig1:
+		return _input_values.get(_sig1, 0)
+	return _const
+
+
+func _get_rhs() -> int:
+	if _sig2:
+		return _input_values.get(_sig2, 0)
+	return _const

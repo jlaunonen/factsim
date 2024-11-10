@@ -37,6 +37,8 @@ var _sig1 := ""
 var _sig2 := ""
 var _const := 0
 var _op := ""
+var _circuit_enabled := false
+var _valid_condition := false
 
 
 func _ready() -> void:
@@ -49,12 +51,16 @@ func _apply_config() -> void:
 	super()
 	if _config == null:
 		label.text = ""
+		_valid_condition = false
+		_circuit_enabled = false
 		return
 	_use_colors = _config.controlBehavior.get("use_colors", false)
+	_circuit_enabled = _config.connection1 or _config.connection2
 
 	var cfg = _config.controlBehavior.get("circuit_condition")
 	if cfg == null:
 		label.text = ""
+		_valid_condition = false
 		return
 
 	var sig1 = cfg.get("first_signal", {})
@@ -66,6 +72,8 @@ func _apply_config() -> void:
 
 	_sig1 = parse_signal_key(sig1)
 	_sig2 = parse_signal_key(sig2)
+
+	_valid_condition = _sig1 and (_sig2 or cfg.has("constant"))
 
 	var txt := "{0} {1} {2}".format([
 		get_operand(sig1, _const),
@@ -93,30 +101,59 @@ func post_simulate() -> void:
 
 
 func _simulate() -> void:
-	if const_cond(_input_values, _sig1, _sig2, _const, _op):
+	if _circuit_enabled and _valid_condition and const_cond(_input_values):
 		_apply_color(true, _input_values)
+	elif not _circuit_enabled and _host.is_night:
+		_apply_color(true, {})
 	else:
 		_apply_color(false, {})
 
 
-static func const_cond(signals: Dictionary, sig1: String, sig2: String, constant: int, condition) -> bool:
+func const_cond(signals: Dictionary) -> bool:
 	var lhs : int
 	var rhs : int
-	if sig1 and sig2:
-		lhs = signals.get(sig1, 0)
-		rhs = signals.get(sig2, 0)
-	elif sig1:
-		lhs = signals.get(sig1, 0)
-		rhs = constant
-	elif sig2:
-		lhs = constant
-		rhs = signals.get(sig2, 0)
+	# Only first can be ANYTHING / EVERYTHING.
+	if self._sig1 == E.ANYTHING_SIGNAL or self._sig1 == E.EVERYTHING_SIGNAL:
+		if self._sig2:
+			rhs = signals.get(self.sig2, 0)
+		else:
+			rhs = self._const
 
+		# When no signals, EVERYTHING gives true. ANYTHING gives false.
+		if self._sig1 == E.ANYTHING_SIGNAL:
+			var r := false
+			for k in signals:
+				var v : int = signals[k]
+				if cond(v, rhs, self._op):
+					r = true
+			return r
+		else:
+			# EVERYTHING
+			var r := true
+			for k in signals:
+				var v : int = signals[k]
+				if not cond(v, rhs, self._op):
+					r = false
+			return r
+
+	if self._sig1 and self._sig2:
+		lhs = signals.get(self._sig1, 0)
+		rhs = signals.get(self._sig2, 0)
+	elif self._sig1:
+		lhs = signals.get(self._sig1, 0)
+		rhs = self._const
+	elif self._sig2:
+		lhs = self._const
+		rhs = signals.get(self._sig2, 0)
+	return cond(lhs, rhs, self._op)
+
+
+static func cond(lhs: int, rhs: int, condition: String) -> bool:
 	match condition:
-		"=": return lhs == rhs
-		"<": return lhs < rhs
-		">": return lhs > rhs
-		"!=": return lhs != rhs
-		"<=": return lhs <= rhs
-		">=": return lhs >= rhs
+		E.CMP_EQ: return lhs == rhs
+		E.CMP_LT: return lhs < rhs
+		E.CMP_GT: return lhs > rhs
+		E.CMP_NE: return lhs != rhs
+		E.CMP_LE: return lhs <= rhs
+		E.CMP_GE: return lhs >= rhs
 		_: return false

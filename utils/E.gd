@@ -23,6 +23,14 @@ static func netColorToName(netColor: int) -> String:
 	return "RED" if netColor < NetConnectorGREEN_1 else "GREEN"
 
 
+const CMP_EQ = "="
+const CMP_NE = "\u2260"
+const CMP_LT = "<"
+const CMP_LE = "\u2264"
+const CMP_GT = ">"
+const CMP_GE = "\u2265"
+
+
 const ANYTHING_SIGNAL = "virtual:signal-anything"
 const EACH_SIGNAL = "virtual:signal-each"
 const EVERYTHING_SIGNAL = "virtual:signal-everything"
