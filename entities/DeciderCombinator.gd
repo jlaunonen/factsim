@@ -1,14 +1,10 @@
 extends CombinatorBase
 class_name DeciderCombinator
 
-const ANYTHING_SIGNAL = "virtual:signal-anything"
-const EACH_SIGNAL = "virtual:signal-each"
-const EVERYTHING_SIGNAL = "virtual:signal-everything"
-
 const SPECIALS = [
-	ANYTHING_SIGNAL,
-	EACH_SIGNAL,
-	EVERYTHING_SIGNAL,
+	E.ANYTHING_SIGNAL,
+	E.EACH_SIGNAL,
+	E.EVERYTHING_SIGNAL,
 ]
 
 

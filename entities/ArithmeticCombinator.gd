@@ -1,8 +1,6 @@
 extends CombinatorBase
 class_name ArithmeticCombinator
 
-const EACH_SIGNAL = "virtual:signal-each"
-
 
 var _sig1 := ""
 var _sig2 := ""
@@ -51,10 +49,10 @@ func post_simulate() -> void:
 
 
 func _simulate() -> void:
-	if _out == EACH_SIGNAL:
+	if _out == E.EACH_SIGNAL:
 		# Pairwise operations with a constant. May not have only one EACH at input.
 		var values: Dictionary
-		if _sig1 == EACH_SIGNAL:
+		if _sig1 == E.EACH_SIGNAL:
 			values = each(_input_values, _const1, _op)
 		else:
 			values = each_rev(_input_values, _const1, _op)
@@ -64,9 +62,9 @@ func _simulate() -> void:
 	else:
 		# Single output.
 		var value: int
-		if _sig1 == EACH_SIGNAL:
+		if _sig1 == E.EACH_SIGNAL:
 			value = each_sum(_input_values, _const1, _op)
-		elif _sig2 == EACH_SIGNAL:
+		elif _sig2 == E.EACH_SIGNAL:
 			value = each_sum_rev(_input_values, _const1, _op)
 		else:
 			value = proc(_input_values, _sig1, _sig2, _const1, _const2, _op)

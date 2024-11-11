@@ -21,3 +21,8 @@ static func enumToNetColor(netConnector: int) -> int:
 static func netColorToName(netColor: int) -> String:
 	# XXX: Comparison from color to connector, but as they are supposed to be compatible, the function works for connectors too.
 	return "RED" if netColor < NetConnectorGREEN_1 else "GREEN"
+
+
+const ANYTHING_SIGNAL = "virtual:signal-anything"
+const EACH_SIGNAL = "virtual:signal-each"
+const EVERYTHING_SIGNAL = "virtual:signal-everything"
