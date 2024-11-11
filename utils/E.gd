@@ -34,3 +34,7 @@ const CMP_GE = "\u2265"
 const ANYTHING_SIGNAL = "virtual:signal-anything"
 const EACH_SIGNAL = "virtual:signal-each"
 const EVERYTHING_SIGNAL = "virtual:signal-everything"
+
+
+const MIN_INT = -2147483648
+const MAX_INT = 2147483647 + 1  ## Exclusive

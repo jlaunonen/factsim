@@ -50,12 +50,15 @@ func post_simulate() -> void:
 
 func _simulate() -> void:
 	if _out == E.EACH_SIGNAL:
-		# Pairwise operations with a constant. May not have only one EACH at input.
+		# Pairwise operations with a value.
 		var values: Dictionary
 		if _sig1 == E.EACH_SIGNAL:
-			values = each(_input_values, _const1, _op)
+			# EACH [] const/sig -> EACH
+			values = each(_input_values, _get_rhs(), _op)
 		else:
-			values = each_rev(_input_values, _const1, _op)
+			# At least one EACH input must be present for EACH to be valid output.
+			values = {}
+
 		_send_all_to_net(E.NetConnectorGREEN_2, values)
 		_send_all_to_net(E.NetConnectorRED_2, values)
 		_output_values = values
@@ -63,47 +66,48 @@ func _simulate() -> void:
 		# Single output.
 		var value: int
 		if _sig1 == E.EACH_SIGNAL:
-			value = each_sum(_input_values, _const1, _op)
-		elif _sig2 == E.EACH_SIGNAL:
-			value = each_sum_rev(_input_values, _const1, _op)
+			# EACH [] const/sig -> sig : sum of results
+			value = each_sum(_input_values, _get_rhs(), _op)
 		else:
-			value = proc(_input_values, _sig1, _sig2, _const1, _const2, _op)
+			# const/sig [] const/sig -> sig
+			value = oper(_get_lhs(), _get_rhs(), _op)
+
 		_send_to_net(E.NetConnectorGREEN_2, _out, value)
 		_send_to_net(E.NetConnectorRED_2, _out, value)
 		_output_values[_out] = value
 
 
-static func proc(signals: Dictionary, sig1: String, sig2: String, constant1: int, constant2: int, operation) -> int:
-	var lhs : int
-	var rhs : int
-	if sig1 and sig2:
-		lhs = signals.get(sig1, 0)
-		rhs = signals.get(sig2, 0)
-	elif sig1:
-		lhs = signals.get(sig1, 0)
-		rhs = constant1
-	elif sig2:
-		lhs = constant1
-		rhs = signals.get(sig2, 0)
-	else:
-		lhs = constant1
-		rhs = constant2
-	return oper(lhs, rhs, operation)
+func _get_lhs() -> int:
+	if _sig1:
+		return _input_values.get(_sig1, 0)
+	return _const1
+
+
+func _get_rhs() -> int:
+	if _sig2:
+		return _input_values.get(_sig2, 0)
+	return _const2
 
 
 static func oper(lhs: int, rhs: int, operation: String) -> int:
 	match operation:
-		"+": return lhs + rhs
-		"-": return lhs - rhs
-		"*": return lhs * rhs
-		"/": return lhs / rhs
-		"%": return lhs % rhs
-		"^": return lhs ** rhs
-		"<<": return lhs << rhs
+		"+": return wrapi(lhs + rhs, E.MIN_INT, E.MAX_INT)
+		"-": return wrapi(lhs - rhs, E.MIN_INT, E.MAX_INT)
+		"*": return wrapi(lhs * rhs, E.MIN_INT, E.MAX_INT)
+		"/":
+			if rhs == 0:
+				return 0
+			return wrapi(lhs / rhs, E.MIN_INT, E.MAX_INT)
+		"%":
+			if rhs == 0:
+				return 0
+			return wrapi(lhs % rhs, E.MIN_INT, E.MAX_INT)
+		"^": return wrapi(lhs ** rhs, E.MIN_INT, E.MAX_INT)
+		"<<": return wrapi(lhs << rhs, E.MIN_INT, E.MAX_INT)
 		">>": return lhs >> rhs
 		"AND": return lhs & rhs
-		"OR": return lhs | rhs
-		"XOR": return lhs ^ rhs
+		"OR": return wrapi(lhs | rhs, E.MIN_INT, E.MAX_INT)
+		"XOR": return wrapi(lhs ^ rhs, E.MIN_INT, E.MAX_INT)
 		_: return 0
 
 
