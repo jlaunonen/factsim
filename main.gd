@@ -57,6 +57,7 @@ var is_night := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	E.init()
 	if colors == null:
 		colors = load("res://default.tres")
 

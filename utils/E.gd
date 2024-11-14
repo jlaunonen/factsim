@@ -38,3 +38,10 @@ const EVERYTHING_SIGNAL = "virtual:signal-everything"
 
 const MIN_INT = -2147483648
 const MAX_INT = 2147483647 + 1  ## Exclusive
+
+
+const NO_VALUES = {}
+
+
+static func init() -> void:
+	NO_VALUES.make_read_only()

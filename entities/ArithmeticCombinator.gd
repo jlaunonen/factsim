@@ -57,7 +57,7 @@ func _simulate() -> void:
 			values = each(_input_values, _get_rhs(), _op)
 		else:
 			# At least one EACH input must be present for EACH to be valid output.
-			values = {}
+			values = E.NO_VALUES
 
 		_send_all_to_net(E.NetConnectorGREEN_2, values)
 		_send_all_to_net(E.NetConnectorRED_2, values)

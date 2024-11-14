@@ -106,7 +106,7 @@ func _simulate() -> void:
 	elif not _circuit_enabled and _host.is_night:
 		_apply_color(true, {})
 	else:
-		_apply_color(false, {})
+		_apply_color(false, E.NO_VALUES)
 
 
 func const_cond(signals: Dictionary) -> bool:
