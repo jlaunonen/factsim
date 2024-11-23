@@ -5,6 +5,8 @@ var _is_dragging := false
 var _drag_start: Vector2
 
 func _unhandled_input(event: InputEvent):
+	if not enabled:
+		return
 	if event is InputEventMouse:
 		if event.button_mask & MOUSE_BUTTON_MASK_LEFT:
 			pass
