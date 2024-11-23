@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://c00kopp7fel8c"]
+
+[ext_resource type="Script" path="res://tests/run_tests.gd" id="1_ybbub"]
+
+[node name="RunTests" type="Node2D"]
+script = ExtResource("1_ybbub")
+switch_delay = 0.0
+
+[node name="testNode" type="Node2D" parent="."]
+editor_description = "Scene under test will be added as a child of this node."
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Tree" type="Tree" parent="CanvasLayer"]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 552.0
+grow_vertical = 2
+columns = 2
+
+[connection signal="cell_selected" from="CanvasLayer/Tree" to="." method="_on_tree_cell_selected"]

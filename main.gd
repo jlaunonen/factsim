@@ -31,6 +31,8 @@ var _entityScenes = {
 }
 var _fallbackScene = preload("res://entities/Placeholder.tscn")
 
+var load_initial_bp := true
+
 ## Shared color definitions (read by [method CombinatorBase._ready]).
 @export var colors: ColorDefs
 
@@ -63,7 +65,12 @@ func _ready() -> void:
 
 	timer.timeout.connect(_on_timer_timeout)
 
-	_load_bp(preload("res://initial.json"))
+	if load_initial_bp:
+		_load_bp(preload("res://initial.json"))
+	else:
+		removeAllChildren(components)
+		removeAllChildren(connections)
+
 	_on_sim_speed_slider_value_changed($"CanvasLayer/simSpeedSlider".value)
 	_on_day_night_toggled(is_night)
 

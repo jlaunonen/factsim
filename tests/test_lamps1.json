@@ -1,0 +1,549 @@
+{
+	"blueprint": {
+		"icons": [
+			{
+				"signal": {
+					"type": "item",
+					"name": "small-lamp"
+				},
+				"index": 1
+			}
+		],
+		"entities": [
+			{
+				"entity_number": 1,
+				"name": "small-lamp",
+				"position": {
+					"x": -16.5,
+					"y": 23.5
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 12
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 2,
+				"name": "small-lamp",
+				"position": {
+					"x": -17.5,
+					"y": 23.5
+				}
+			},
+			{
+				"entity_number": 3,
+				"name": "small-lamp",
+				"position": {
+					"x": -14.5,
+					"y": 23.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"constant": 0,
+						"comparator": ">"
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 13
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 4,
+				"name": "small-lamp",
+				"position": {
+					"x": -15.5,
+					"y": 23.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"constant": 0,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 14
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 5,
+				"name": "small-lamp",
+				"position": {
+					"x": -12.5,
+					"y": 23.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-everything"
+						},
+						"constant": 0,
+						"comparator": ">"
+					},
+					"use_colors": true
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 15
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 6,
+				"name": "small-lamp",
+				"position": {
+					"x": -13.5,
+					"y": 23.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-everything"
+						},
+						"constant": 0,
+						"comparator": ">"
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 16
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 7,
+				"name": "small-lamp",
+				"position": {
+					"x": -10.5,
+					"y": 23.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-anything"
+						},
+						"constant": 0,
+						"comparator": ">"
+					},
+					"use_colors": true
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 17
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 8,
+				"name": "small-lamp",
+				"position": {
+					"x": -11.5,
+					"y": 23.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"constant": 0,
+						"comparator": ">"
+					},
+					"use_colors": true
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 18
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 9,
+				"name": "small-lamp",
+				"position": {
+					"x": -8.5,
+					"y": 23.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-green"
+						},
+						"constant": 0,
+						"comparator": ">"
+					},
+					"use_colors": true
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 19
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 10,
+				"name": "small-lamp",
+				"position": {
+					"x": -9.5,
+					"y": 23.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"constant": 0,
+						"comparator": ">"
+					},
+					"use_colors": true
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 20
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 11,
+				"name": "small-lamp",
+				"position": {
+					"x": -7.5,
+					"y": 23.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"constant": 1,
+						"comparator": "\u2265"
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 21
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 12,
+				"name": "constant-combinator",
+				"position": {
+					"x": -16.5,
+					"y": 24.5
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 1
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 13,
+				"name": "constant-combinator",
+				"position": {
+					"x": -14.5,
+					"y": 24.5
+				},
+				"control_behavior": {
+					"filters": [
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-A"
+							},
+							"count": 1,
+							"index": 1
+						}
+					]
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 3
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 14,
+				"name": "constant-combinator",
+				"position": {
+					"x": -15.5,
+					"y": 24.5
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 4
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 15,
+				"name": "constant-combinator",
+				"position": {
+					"x": -12.5,
+					"y": 24.5
+				},
+				"control_behavior": {
+					"filters": [
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-green"
+							},
+							"count": 1,
+							"index": 1
+						}
+					]
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 5
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 16,
+				"name": "constant-combinator",
+				"position": {
+					"x": -13.5,
+					"y": 24.5
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 6
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 17,
+				"name": "constant-combinator",
+				"position": {
+					"x": -10.5,
+					"y": 24.5
+				},
+				"control_behavior": {
+					"filters": [
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-blue"
+							},
+							"count": 1,
+							"index": 1
+						}
+					]
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 7
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 18,
+				"name": "constant-combinator",
+				"position": {
+					"x": -11.5,
+					"y": 24.5
+				},
+				"control_behavior": {
+					"filters": [
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-green"
+							},
+							"count": 1,
+							"index": 1
+						},
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-A"
+							},
+							"count": 1,
+							"index": 2
+						}
+					]
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 8
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 19,
+				"name": "constant-combinator",
+				"position": {
+					"x": -8.5,
+					"y": 24.5
+				},
+				"control_behavior": {
+					"filters": [
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-green"
+							},
+							"count": 1,
+							"index": 1
+						}
+					]
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 9
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 20,
+				"name": "constant-combinator",
+				"position": {
+					"x": -9.5,
+					"y": 24.5
+				},
+				"control_behavior": {
+					"filters": [
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-green"
+							},
+							"count": 1,
+							"index": 1
+						}
+					]
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 10
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 21,
+				"name": "constant-combinator",
+				"position": {
+					"x": -7.5,
+					"y": 24.5
+				},
+				"control_behavior": {
+					"filters": [
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-A"
+							},
+							"count": 1,
+							"index": 1
+						}
+					]
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 11
+							}
+						]
+					}
+				}
+			}
+		],
+		"item": "blueprint",
+		"label": "test_lamp1",
+		"version": 281474976710656
+	}
+}

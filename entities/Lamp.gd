@@ -32,6 +32,8 @@ static func _ensure_color_map(_colors: ColorDefs):
 
 @onready var indicator: Sprite2D = $"Circle"
 
+var is_on := false
+
 var _use_colors := false
 var _sig1 := ""
 var _sig2 := ""
@@ -85,6 +87,7 @@ func _apply_config() -> void:
 
 
 func _apply_color(on: bool, signals: Dictionary):
+	is_on = on
 	if not on:
 		indicator.modulate = colors.lamp_off
 		return

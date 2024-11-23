@@ -1,0 +1,1732 @@
+{
+	"blueprint": {
+		"icons": [
+			{
+				"signal": {
+					"type": "item",
+					"name": "decider-combinator"
+				},
+				"index": 1
+			}
+		],
+		"entities": [
+			{
+				"entity_number": 1,
+				"name": "small-lamp",
+				"position": {
+					"x": -13.5,
+					"y": 41.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-C"
+						},
+						"constant": -1,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 12
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 2,
+				"name": "small-lamp",
+				"position": {
+					"x": -12.5,
+					"y": 41.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-C"
+						},
+						"constant": -1,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 13
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 3,
+				"name": "small-lamp",
+				"position": {
+					"x": -5.5,
+					"y": 41.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-C"
+						},
+						"constant": 1,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 25
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 4,
+				"name": "small-lamp",
+				"position": {
+					"x": -4.5,
+					"y": 41.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-C"
+						},
+						"constant": 22,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 26
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 5,
+				"name": "small-lamp",
+				"position": {
+					"x": -17.5,
+					"y": 43.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-B"
+						},
+						"constant": 1,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 27,
+								"circuit_id": 2
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 6,
+				"name": "small-lamp",
+				"position": {
+					"x": -16.5,
+					"y": 43.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"constant": 3,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 28,
+								"circuit_id": 2
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 7,
+				"name": "small-lamp",
+				"position": {
+					"x": -15.5,
+					"y": 43.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-B"
+						},
+						"constant": 3,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 29,
+								"circuit_id": 2
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 8,
+				"name": "small-lamp",
+				"position": {
+					"x": -14.5,
+					"y": 43.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"constant": 1,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 9
+							},
+							{
+								"entity_id": 30,
+								"circuit_id": 2
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 9,
+				"name": "small-lamp",
+				"position": {
+					"x": -14.5,
+					"y": 42.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-B"
+						},
+						"constant": 1,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 8
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 10,
+				"name": "small-lamp",
+				"position": {
+					"x": -13.5,
+					"y": 43.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"constant": 3,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 12
+							},
+							{
+								"entity_id": 31,
+								"circuit_id": 2
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 11,
+				"name": "small-lamp",
+				"position": {
+					"x": -12.5,
+					"y": 43.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"constant": 3,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 13
+							},
+							{
+								"entity_id": 32,
+								"circuit_id": 2
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 12,
+				"name": "small-lamp",
+				"position": {
+					"x": -13.5,
+					"y": 42.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-B"
+						},
+						"constant": 5,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 1
+							},
+							{
+								"entity_id": 10
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 13,
+				"name": "small-lamp",
+				"position": {
+					"x": -12.5,
+					"y": 42.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-B"
+						},
+						"constant": 5,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 2
+							},
+							{
+								"entity_id": 11
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 14,
+				"name": "small-lamp",
+				"position": {
+					"x": -11.5,
+					"y": 43.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"constant": 0,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 16
+							},
+							{
+								"entity_id": 33,
+								"circuit_id": 2
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 15,
+				"name": "small-lamp",
+				"position": {
+					"x": -10.5,
+					"y": 43.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"constant": 1,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 17
+							},
+							{
+								"entity_id": 34,
+								"circuit_id": 2
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 16,
+				"name": "small-lamp",
+				"position": {
+					"x": -11.5,
+					"y": 42.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-B"
+						},
+						"constant": 0,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 14
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 17,
+				"name": "small-lamp",
+				"position": {
+					"x": -10.5,
+					"y": 42.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-B"
+						},
+						"constant": 1,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 15
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 18,
+				"name": "small-lamp",
+				"position": {
+					"x": -9.5,
+					"y": 43.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"constant": 0,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 20
+							},
+							{
+								"entity_id": 35,
+								"circuit_id": 2
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 19,
+				"name": "small-lamp",
+				"position": {
+					"x": -8.5,
+					"y": 43.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"constant": 1,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 36,
+								"circuit_id": 2
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 20,
+				"name": "small-lamp",
+				"position": {
+					"x": -9.5,
+					"y": 42.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-B"
+						},
+						"constant": 0,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 18
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 21,
+				"name": "small-lamp",
+				"position": {
+					"x": -7.5,
+					"y": 43.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"constant": 0,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 37,
+								"circuit_id": 2
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 22,
+				"name": "small-lamp",
+				"position": {
+					"x": -6.5,
+					"y": 43.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"constant": 0,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 38,
+								"circuit_id": 2
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 23,
+				"name": "small-lamp",
+				"position": {
+					"x": -5.5,
+					"y": 43.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"constant": 0,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 25
+							},
+							{
+								"entity_id": 39,
+								"circuit_id": 2
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 24,
+				"name": "small-lamp",
+				"position": {
+					"x": -4.5,
+					"y": 43.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"constant": 0,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 26
+							},
+							{
+								"entity_id": 40,
+								"circuit_id": 2
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 25,
+				"name": "small-lamp",
+				"position": {
+					"x": -5.5,
+					"y": 42.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-B"
+						},
+						"constant": 1,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 3
+							},
+							{
+								"entity_id": 23
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 26,
+				"name": "small-lamp",
+				"position": {
+					"x": -4.5,
+					"y": 42.5
+				},
+				"control_behavior": {
+					"circuit_condition": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-B"
+						},
+						"constant": 11,
+						"comparator": "="
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 4
+							},
+							{
+								"entity_id": 24
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 27,
+				"name": "decider-combinator",
+				"position": {
+					"x": -17.5,
+					"y": 45
+				},
+				"control_behavior": {
+					"decider_conditions": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"constant": 3,
+						"comparator": "=",
+						"output_signal": {
+							"type": "virtual",
+							"name": "signal-B"
+						},
+						"copy_count_from_input": false
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 41
+							}
+						]
+					},
+					"2": {
+						"red": [
+							{
+								"entity_id": 5
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 28,
+				"name": "decider-combinator",
+				"position": {
+					"x": -16.5,
+					"y": 45
+				},
+				"control_behavior": {
+					"decider_conditions": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"constant": 3,
+						"comparator": "=",
+						"output_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"copy_count_from_input": true
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 42
+							}
+						]
+					},
+					"2": {
+						"red": [
+							{
+								"entity_id": 6
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 29,
+				"name": "decider-combinator",
+				"position": {
+					"x": -15.5,
+					"y": 45
+				},
+				"control_behavior": {
+					"decider_conditions": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"second_signal": {
+							"type": "virtual",
+							"name": "signal-B"
+						},
+						"comparator": "=",
+						"output_signal": {
+							"type": "virtual",
+							"name": "signal-B"
+						},
+						"copy_count_from_input": true
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 43
+							}
+						]
+					},
+					"2": {
+						"red": [
+							{
+								"entity_id": 7
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 30,
+				"name": "decider-combinator",
+				"position": {
+					"x": -14.5,
+					"y": 45
+				},
+				"control_behavior": {
+					"decider_conditions": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"constant": 0,
+						"comparator": ">",
+						"output_signal": {
+							"type": "virtual",
+							"name": "signal-everything"
+						},
+						"copy_count_from_input": false
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 44
+							}
+						]
+					},
+					"2": {
+						"red": [
+							{
+								"entity_id": 8
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 31,
+				"name": "decider-combinator",
+				"position": {
+					"x": -13.5,
+					"y": 45
+				},
+				"control_behavior": {
+					"decider_conditions": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"constant": 0,
+						"comparator": ">",
+						"output_signal": {
+							"type": "virtual",
+							"name": "signal-everything"
+						},
+						"copy_count_from_input": true
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 45
+							}
+						]
+					},
+					"2": {
+						"red": [
+							{
+								"entity_id": 10
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 32,
+				"name": "decider-combinator",
+				"position": {
+					"x": -12.5,
+					"y": 45
+				},
+				"control_behavior": {
+					"decider_conditions": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-anything"
+						},
+						"constant": 0,
+						"comparator": ">",
+						"output_signal": {
+							"type": "virtual",
+							"name": "signal-everything"
+						},
+						"copy_count_from_input": true
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 46
+							}
+						]
+					},
+					"2": {
+						"red": [
+							{
+								"entity_id": 11
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 33,
+				"name": "decider-combinator",
+				"position": {
+					"x": -11.5,
+					"y": 45
+				},
+				"control_behavior": {
+					"decider_conditions": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-anything"
+						},
+						"constant": 0,
+						"comparator": ">",
+						"output_signal": {
+							"type": "virtual",
+							"name": "signal-everything"
+						},
+						"copy_count_from_input": true
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 47
+							}
+						]
+					},
+					"2": {
+						"red": [
+							{
+								"entity_id": 14
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 34,
+				"name": "decider-combinator",
+				"position": {
+					"x": -10.5,
+					"y": 45
+				},
+				"control_behavior": {
+					"decider_conditions": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-everything"
+						},
+						"constant": 0,
+						"comparator": ">",
+						"output_signal": {
+							"type": "virtual",
+							"name": "signal-everything"
+						},
+						"copy_count_from_input": false
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 48
+							}
+						]
+					},
+					"2": {
+						"red": [
+							{
+								"entity_id": 15
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 35,
+				"name": "decider-combinator",
+				"position": {
+					"x": -9.5,
+					"y": 45
+				},
+				"control_behavior": {
+					"decider_conditions": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-everything"
+						},
+						"constant": 0,
+						"comparator": ">",
+						"output_signal": {
+							"type": "virtual",
+							"name": "signal-everything"
+						},
+						"copy_count_from_input": false
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 49
+							}
+						]
+					},
+					"2": {
+						"red": [
+							{
+								"entity_id": 18
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 36,
+				"name": "decider-combinator",
+				"position": {
+					"x": -8.5,
+					"y": 45
+				},
+				"control_behavior": {
+					"decider_conditions": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-everything"
+						},
+						"constant": 0,
+						"comparator": ">",
+						"output_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"copy_count_from_input": false
+					}
+				},
+				"connections": {
+					"2": {
+						"red": [
+							{
+								"entity_id": 19
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 37,
+				"name": "decider-combinator",
+				"position": {
+					"x": -7.5,
+					"y": 45
+				},
+				"control_behavior": {
+					"decider_conditions": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-anything"
+						},
+						"constant": 0,
+						"comparator": ">",
+						"output_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"copy_count_from_input": false
+					}
+				},
+				"connections": {
+					"2": {
+						"red": [
+							{
+								"entity_id": 21
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 38,
+				"name": "decider-combinator",
+				"position": {
+					"x": -6.5,
+					"y": 45
+				},
+				"control_behavior": {
+					"decider_conditions": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-each"
+						},
+						"constant": 0,
+						"comparator": ">",
+						"output_signal": {
+							"type": "virtual",
+							"name": "signal-A"
+						},
+						"copy_count_from_input": false
+					}
+				},
+				"connections": {
+					"2": {
+						"red": [
+							{
+								"entity_id": 22
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 39,
+				"name": "decider-combinator",
+				"position": {
+					"x": -5.5,
+					"y": 45
+				},
+				"control_behavior": {
+					"decider_conditions": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-each"
+						},
+						"constant": 10,
+						"comparator": ">",
+						"output_signal": {
+							"type": "virtual",
+							"name": "signal-each"
+						},
+						"copy_count_from_input": false
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 50
+							}
+						]
+					},
+					"2": {
+						"red": [
+							{
+								"entity_id": 23
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 40,
+				"name": "decider-combinator",
+				"position": {
+					"x": -4.5,
+					"y": 45
+				},
+				"control_behavior": {
+					"decider_conditions": {
+						"first_signal": {
+							"type": "virtual",
+							"name": "signal-each"
+						},
+						"constant": 10,
+						"comparator": ">",
+						"output_signal": {
+							"type": "virtual",
+							"name": "signal-each"
+						},
+						"copy_count_from_input": true
+					}
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 51
+							}
+						]
+					},
+					"2": {
+						"red": [
+							{
+								"entity_id": 24
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 41,
+				"name": "constant-combinator",
+				"position": {
+					"x": -17.5,
+					"y": 46.5
+				},
+				"control_behavior": {
+					"filters": [
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-A"
+							},
+							"count": 3,
+							"index": 1
+						}
+					]
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 27,
+								"circuit_id": 1
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 42,
+				"name": "constant-combinator",
+				"position": {
+					"x": -16.5,
+					"y": 46.5
+				},
+				"control_behavior": {
+					"filters": [
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-A"
+							},
+							"count": 3,
+							"index": 1
+						}
+					]
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 28,
+								"circuit_id": 1
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 43,
+				"name": "constant-combinator",
+				"position": {
+					"x": -15.5,
+					"y": 46.5
+				},
+				"control_behavior": {
+					"filters": [
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-A"
+							},
+							"count": 3,
+							"index": 1
+						},
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-B"
+							},
+							"count": 3,
+							"index": 2
+						}
+					]
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 29,
+								"circuit_id": 1
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 44,
+				"name": "constant-combinator",
+				"position": {
+					"x": -14.5,
+					"y": 46.5
+				},
+				"control_behavior": {
+					"filters": [
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-A"
+							},
+							"count": 3,
+							"index": 1
+						},
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-B"
+							},
+							"count": 5,
+							"index": 2
+						}
+					]
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 30,
+								"circuit_id": 1
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 45,
+				"name": "constant-combinator",
+				"position": {
+					"x": -13.5,
+					"y": 46.5
+				},
+				"control_behavior": {
+					"filters": [
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-A"
+							},
+							"count": 3,
+							"index": 1
+						},
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-B"
+							},
+							"count": 5,
+							"index": 2
+						},
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-C"
+							},
+							"count": -1,
+							"index": 3
+						}
+					]
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 31,
+								"circuit_id": 1
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 46,
+				"name": "constant-combinator",
+				"position": {
+					"x": -12.5,
+					"y": 46.5
+				},
+				"control_behavior": {
+					"filters": [
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-A"
+							},
+							"count": 3,
+							"index": 1
+						},
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-B"
+							},
+							"count": 5,
+							"index": 2
+						},
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-C"
+							},
+							"count": -1,
+							"index": 3
+						}
+					]
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 32,
+								"circuit_id": 1
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 47,
+				"name": "constant-combinator",
+				"position": {
+					"x": -11.5,
+					"y": 46.5
+				},
+				"control_behavior": {
+					"filters": [
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-A"
+							},
+							"count": -1,
+							"index": 1
+						},
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-B"
+							},
+							"count": -1,
+							"index": 2
+						}
+					]
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 33,
+								"circuit_id": 1
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 48,
+				"name": "constant-combinator",
+				"position": {
+					"x": -10.5,
+					"y": 46.5
+				},
+				"control_behavior": {
+					"filters": [
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-A"
+							},
+							"count": 2,
+							"index": 1
+						},
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-B"
+							},
+							"count": 3,
+							"index": 2
+						}
+					]
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 34,
+								"circuit_id": 1
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 49,
+				"name": "constant-combinator",
+				"position": {
+					"x": -9.5,
+					"y": 46.5
+				},
+				"control_behavior": {
+					"filters": [
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-A"
+							},
+							"count": -1,
+							"index": 1
+						},
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-B"
+							},
+							"count": -1,
+							"index": 2
+						}
+					]
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 35,
+								"circuit_id": 1
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 50,
+				"name": "constant-combinator",
+				"position": {
+					"x": -5.5,
+					"y": 46.5
+				},
+				"control_behavior": {
+					"filters": [
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-A"
+							},
+							"count": 5,
+							"index": 1
+						},
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-B"
+							},
+							"count": 11,
+							"index": 2
+						},
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-C"
+							},
+							"count": 22,
+							"index": 3
+						}
+					]
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 39,
+								"circuit_id": 1
+							}
+						]
+					}
+				}
+			},
+			{
+				"entity_number": 51,
+				"name": "constant-combinator",
+				"position": {
+					"x": -4.5,
+					"y": 46.5
+				},
+				"control_behavior": {
+					"filters": [
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-A"
+							},
+							"count": 5,
+							"index": 1
+						},
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-B"
+							},
+							"count": 11,
+							"index": 2
+						},
+						{
+							"signal": {
+								"type": "virtual",
+								"name": "signal-C"
+							},
+							"count": 22,
+							"index": 3
+						}
+					]
+				},
+				"connections": {
+					"1": {
+						"red": [
+							{
+								"entity_id": 40,
+								"circuit_id": 1
+							}
+						]
+					}
+				}
+			}
+		],
+		"item": "blueprint",
+		"label": "test_decider1",
+		"version": 281474976710656
+	}
+}
