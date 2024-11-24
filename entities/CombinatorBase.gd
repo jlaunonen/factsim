@@ -155,6 +155,13 @@ static func parseSignalName(sig: Dictionary) -> String:
 	if sig.is_empty():
 		return ""
 	var sigName : String = sig["name"]
+
+	# Shorten special signal names.
+	match sigName:
+		"signal-anything": return "ANY"
+		"signal-each": return "EACH"
+		"signal-everything": return "EVR"
+
 	return sigName.replace("signal-", "")
 
 
