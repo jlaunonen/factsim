@@ -88,10 +88,12 @@ func set_sim_visibility(ind: int, vis: bool) -> void:
 
 
 func run_tests() -> void:
+	(current_scene.get_node(^"CanvasLayer/dayNight") as Button).button_pressed = true  # TODO: Check both
+
 	for i in 5:
 		current_scene.simulate()
 
-	var result = check_asserts()
+	var result = check_asserts(true)
 	current_test_tree_item.set_text(1, "{0} / {1}".format(result))
 	if result[0] == result[1]:
 		current_test_tree_item.collapsed = true
@@ -102,14 +104,26 @@ func run_tests() -> void:
 	next.call_deferred(index + 1)
 
 
-func check_asserts() -> Array[int]:
+func check_asserts(is_night: bool) -> Array[int]:
 	var components = current_scene.get_node("components")
 	var lamps = components.find_children("Lamp-*", "", false, false)
 	var r : Array[int] = [0, lamps.size()]
 	var node_name: String = current_test_tree_item.get_metadata(0)
 
 	for l in lamps:
-		var succ = (l as Lamp).is_on
+		var lamp := l as Lamp
+		var defaults := {
+			"expect_on": true,
+			"expect_night": false,
+		}
+		var assert_extras = defaults.merged(lamp._config._src.get("_assert", {}), true)
+
+		var succ: bool
+		if assert_extras["expect_night"]:
+			succ = lamp.is_on == is_night
+		else:
+			succ = lamp.is_on == assert_extras["expect_on"]
+
 		var assertion = test_result_tree.create_item(current_test_tree_item)
 		assertion.set_text(0, "{2}: {0}x{1}".format([l.position.x, l.position.y, l._config.number]))
 		assertion.set_text(1, "PASS" if succ else "FAIL")

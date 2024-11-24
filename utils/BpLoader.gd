@@ -39,6 +39,7 @@ class BlueprintDto:
 
 
 class EntityDto:
+	var _src: Dictionary
 	var name: String
 	var number: int
 	var direction: int
@@ -48,6 +49,7 @@ class EntityDto:
 	var connection2 # ConnectionPointDto
 
 	func _init(map: Dictionary = {}) -> void:
+		self._src = map
 		self.name = map.get("name") as String
 		self.number = map.get("entity_number")
 		self.direction = map.get("direction", 0)

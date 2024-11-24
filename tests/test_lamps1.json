@@ -11,6 +11,9 @@
 		],
 		"entities": [
 			{
+				"_assert": {
+					"expect_on": false
+				},
 				"entity_number": 1,
 				"name": "small-lamp",
 				"position": {
@@ -28,6 +31,9 @@
 				}
 			},
 			{
+				"_assert": {
+					"expect_night": true
+				},
 				"entity_number": 2,
 				"name": "small-lamp",
 				"position": {
@@ -63,6 +69,9 @@
 				}
 			},
 			{
+				"_assert": {
+					"expect_on": false
+				},
 				"entity_number": 4,
 				"name": "small-lamp",
 				"position": {
@@ -225,6 +234,9 @@
 				}
 			},
 			{
+				"_assert": {
+					"expect_on": false
+				},
 				"entity_number": 10,
 				"name": "small-lamp",
 				"position": {
