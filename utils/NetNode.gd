@@ -1,5 +1,5 @@
 class_name NetNode
-extends Object
+extends RefCounted
 
 var ent: int
 var conn: int
