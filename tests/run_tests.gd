@@ -36,6 +36,8 @@ func _ready() -> void:
 			"node_name": node_name,
 		})
 
+	History.run_test()
+
 	if tests:
 		next.call_deferred(index)
 

@@ -45,6 +45,7 @@ func _apply_config() -> void:
 
 func _on_button_toggled(toggled_on: bool) -> void:
 	_setBtnText(toggled_on)
+	configuration_changed.emit()
 
 
 func _simulate() -> void:

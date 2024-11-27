@@ -49,12 +49,17 @@ var load_initial_bp := true
 @onready var simulated_steps: Label = $"CanvasLayer/simulatedSteps"
 @onready var simulation_speed_label: Label = $"CanvasLayer/simSpeedLabel"
 @onready var selection_manager = $"Selection"
+@onready var step_back: Button = $"CanvasLayer/stepBack"
+@onready var step_forward: Button = $"CanvasLayer/stepForward"
 
 
 var _simulated_steps := 0
 var _is_auto_stepping := false
 var _simulations_per_time := 0
 var is_night := false
+
+var _backtrack_position := 0
+var backstack_depth := 30
 
 
 # Called when the node enters the scene tree for the first time.
@@ -76,7 +81,10 @@ func _ready() -> void:
 
 
 func _on_timer_timeout() -> void:
-	simulate()
+	if _backtrack_position:
+		_on_step_forward_pressed()
+	else:
+		simulate()
 
 
 func highlight_net(network: Array[NetNode], highlighted: bool) -> void:
@@ -145,6 +153,7 @@ func _load_bp(bp):
 
 		n.component_hover.connect(selection_manager.on_entity_hover)
 		n.component_blur.connect(selection_manager.on_entity_blur)
+		n.configuration_changed.connect(flush_history)
 
 	prints("Rawnet:", netParts)
 	var netresult = Network.reorder(netParts, entities)
@@ -187,7 +196,8 @@ func _on_center_pressed() -> void:
 func simulate() -> void:
 	_simulated_steps += 1
 	_simulations_per_time += 1
-	simulated_steps.text = str(_simulated_steps)
+	update_step_index()
+	update_step_enabled()
 
 	# Zero out networks so new values can be written into them.
 	for index in connections.get_child_count():
@@ -210,8 +220,50 @@ func simulate() -> void:
 			child.dump_values()
 
 
+func apply_backtrack() -> void:
+	update_step_index()
+	# Zero out networks so new values can be written into them.
+	for index in connections.get_child_count():
+		var child = connections.get_child(index)
+		child.pre_simulate()
+
+	# Process entities; will directly output to networks.
+	for index in components.get_child_count():
+		var child = components.get_child(index)
+		child.apply_history(_backtrack_position)
+
+	for index in components.get_child_count():
+		var child = components.get_child(index)
+		child.post_simulate()
+
+
 func _on_step_forward_pressed() -> void:
-	simulate()
+	if _backtrack_position:
+		_backtrack_position -= 1
+		apply_backtrack()
+	else:
+		simulate()
+	update_step_enabled()
+
+
+func _on_step_back_pressed() -> void:
+	_backtrack_position += 1
+	apply_backtrack()
+	update_step_enabled()
+
+
+func update_step_index() -> void:
+	if _backtrack_position:
+		simulated_steps.text = "{0} - {1}".format([_simulated_steps, _backtrack_position])
+	else:
+		simulated_steps.text = str(_simulated_steps)
+
+
+func update_step_enabled() -> void:
+	if _backtrack_position >= _simulated_steps or _backtrack_position >= backstack_depth:
+		step_back.disabled = true
+	else:
+		step_back.disabled = false
 
 
 func _on_auto_step_toggled(toggled_on: bool) -> void:
@@ -220,6 +272,16 @@ func _on_auto_step_toggled(toggled_on: bool) -> void:
 		timer.start()
 	else:
 		timer.stop()
+
+
+func flush_history() -> void:
+	if _backtrack_position:
+		_simulated_steps -= _backtrack_position
+		for index in components.get_child_count():
+			var child = components.get_child(index)
+			child.flush_history(_backtrack_position)
+		_backtrack_position = 0
+		update_step_index()
 
 
 func _on_sim_speed_slider_value_changed(value: float) -> void:

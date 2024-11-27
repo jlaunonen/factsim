@@ -23,6 +23,7 @@ var _networks := [null, null, null, null]
 
 var _input_values := {}
 var _output_values := {}
+var _input_history : History
 
 var _listeners := []
 var _host: Node2D  ## SimulationHost
@@ -43,6 +44,7 @@ func _ready():
 	var host = find_parent("SimulationHost")
 	if host != null:
 		_host = host
+		_input_history = History.new(_host.backstack_depth)
 
 	if colors == null:
 		# Usually the shared colors instance is already set at this point, but if the node is present
@@ -190,6 +192,9 @@ func remove_listener(listener) -> void:
 	_listeners.erase(listener)
 
 
+signal configuration_changed()
+
+
 ## Read-phase of simulation
 func post_simulate() -> void:
 	pass
@@ -197,6 +202,9 @@ func post_simulate() -> void:
 
 ## Actual simulation / writes
 func simulate() -> void:
+	_output_values = {}
+	_input_history.push_back(_input_values)
+
 	_simulate()
 	for l in _listeners:
 		l.monitor(_input_values, _output_values)
@@ -206,9 +214,21 @@ func _simulate() -> void:
 	pass
 
 
+func apply_history(backtrack: int) -> void:
+	_output_values = {}
+	_input_values = _input_history.read_back(backtrack)
+
+	_simulate()
+	for l in _listeners:
+		l.monitor(_input_values, _output_values)
+
+
+func flush_history(backtrack: int) -> void:
+	_input_history.drop_last(backtrack)
+
+
 func _clear_and_copy_from_1() -> void:
-	for k in _input_values:
-		_input_values[k] = 0
+	_input_values = {}
 
 	_copy_from(E.NetConnectorGREEN_1)
 	_copy_from(E.NetConnectorRED_1)

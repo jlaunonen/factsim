@@ -252,6 +252,7 @@ script = ExtResource("9_j7f6b")
 [connection signal="pressed" from="CanvasLayer/loadBluePrint" to="." method="_on_load_blue_print_pressed"]
 [connection signal="item_selected" from="CanvasLayer/netOptions" to="." method="_on_net_options_item_selected"]
 [connection signal="pressed" from="CanvasLayer/center" to="." method="_on_center_pressed"]
+[connection signal="pressed" from="CanvasLayer/stepBack" to="." method="_on_step_back_pressed"]
 [connection signal="pressed" from="CanvasLayer/stepForward" to="." method="_on_step_forward_pressed"]
 [connection signal="toggled" from="CanvasLayer/autoStep" to="." method="_on_auto_step_toggled"]
 [connection signal="value_changed" from="CanvasLayer/simSpeedSlider" to="." method="_on_sim_speed_slider_value_changed"]
